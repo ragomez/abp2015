@@ -10,7 +10,7 @@ include ("includesCSS/includeCss.html");
 ?><!DOCTYPE html>
 <html>
   <head>
-    <title><?= $view->getVariable("title", "no title") ?></title>
+    <title><?= $view->getVariable("title", "Concurso de Pinchos 2015") ?></title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">   

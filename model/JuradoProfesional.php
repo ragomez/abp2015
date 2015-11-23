@@ -8,7 +8,7 @@ Class JuradoProfesional{
 
 
 
-	private $idBD;
+	private $idJuradoProfesional;
 	private	$dni;
 	private $telefono;
 	private $nombre;
@@ -18,17 +18,20 @@ Class JuradoProfesional{
 
 
 
-	public function __construct($idBD=NULL, $dni=NULL, $telefono=NULL, $nombre = NULL, $apellidos = NULL) {
-	    $this->idBD = $idBD;
+	public function __construct($idBD=NULL, $dni=NULL, $telefono=NULL,
+                     $nombre = NULL, $apellidos = NULL, $login = NULL, $password = NULL) {
+	    $this->idJuradoProfesional = $idJuradoProfesional;
 	    $this->dni = $dni;
 	    $this->telefono = $telefono;
 	    $this->nombre = $nombre;
-	    $this->apellidos = $apellidos;    
+	    $this->apellidos = $apellidos; 
+      $this->login = $login;
+      $this->password = $password;   
   	}
 
 
-  	public function getIdBD() {
-    	return $this->idBD;
+  	public function getIdJuradoProfesional() {
+    	return $this->idJuradoProfesional;
   	}
   
 
@@ -50,11 +53,18 @@ Class JuradoProfesional{
   	public function getApellidos() {
     	return $this->apellidos;
   	}
-  
+    
+    public function getLogin(){
+      return $this->login;
+    }
+
+    public function getPassword(){
+      return $this->password;
+    }
 	
 
-	public function setIdBD($idBD) {
-    	$this->idBD = $idBD;
+	public function setIdJuradoProfesional($idJuradoProfesional) {
+    	$this->idJuradoProfesional = $idJuradoProfesional;
   	}
 
   	public function setDni($dni) {
@@ -72,8 +82,12 @@ Class JuradoProfesional{
   	public function setApellido($apellido) {
     	$this->apellido = $apellido;
   	}
-
-
+    public function setLogin($login){
+      $this->login = $login;
+    }
+    public function setPassword($password){
+      $this->password = $password;
+    }
 
 
   	public function checkIsValidForCreate() {

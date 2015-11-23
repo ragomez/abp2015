@@ -38,6 +38,12 @@ class UserMapper {
       $stmt->execute(array($user->getIdJuradoPopular(),$user->getlogin(),$user->getPasswd(),$user->getDni(),$user->getName(),
         $user->getApellidos(),$user->getMail(),$user->getTelefono(),$user->getTipo()));    
     }
+   if($user->getTipo() == "Jurado profesional"){
+      $stmt = $this->db->prepare("INSERT INTO juradoProfesional values (?,?,?,?,?,?,?,?,?)");
+      $stmt->execute(array($user->getIdJuradoProfesional(),$user->getlogin(),$user->getPasswd(),$user->getDni(),$user->getName(),
+        $user->getApellidos(),$user->getMail(),$user->getTelefono(),$user->getTipo()));    
+    }
+   
     // idEstablecimiento, cif,nombre,direccion,horario,paginaWeb,telefono,Pincho_idPincho, tipo
     if($user->getTipo() == "Establecimiento"){
       $stmt = $this->db->prepare("INSERT INTO establecimiento values (?,?,?,?,?,?,?,?,?,?,?)");
@@ -45,6 +51,7 @@ class UserMapper {
         $user->getDireccion(),$user->getHorario(),$user->getPaginaWeb(),$user->getTelefono(),$user->getPincho_idPincho(),$user->getTipo()));  
     }
 
+   
     $usuarioGeneral = $this->db->prepare("INSERT INTO usuarios values (?,?,?)");
     $usuarioGeneral->execute(array($user->getlogin(),$user->getPasswd(),$user->getTipo()));    
 
@@ -80,5 +87,6 @@ class UserMapper {
     if ($stmt->fetchColumn() > 0) {
       return true;        
     }
+
   }
 }
