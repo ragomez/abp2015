@@ -32,29 +32,7 @@ class PinchoController extends BaseController {
     $this->pinchoMapper = new PinchoMapper();          
   }
   
-  /**
-   * Action to list posts
-   * 
-   * Loads all the posts from the database.
-   * No HTTP parameters are needed.
-   * 
-   * The views are:
-   * <ul>
-   * <li>posts/index (via include)</li>   
-   * </ul>
-   */
-  public function index() {
-  
-    // obtain the data from the database
-    $pincho = $this->pinchoMapper->findAll();    
-    
-    // put the array containing Pincho object to the view
-    $this->view->setVariable("pincho", $pincho);    
-    
-    // render the view (/view/pincho/index.php)
-    $this->view->render("pincho", "index");
-  }
-  
+
   /**
    * Action to view a given post
    * 
@@ -131,49 +109,51 @@ class PinchoController extends BaseController {
       throw new Exception("Not in session. Adding posts requires login");
     }
     
-    $post = new Post();
+    $pincho = new Pincho();
     
     if (isset($_POST["submit"])) { // reaching via HTTP Post...
       
       // populate the Post object with data form the form
-      $post->setTitle($_POST["title"]);
-      $post->setContent($_POST["content"]);
+      $pincho->setNombrePincho($_POST["nombrePincho"]);
+      $pincho->setDescripcionPincho($_POST["descripcion"]);
+      $pincho->setPrecio($_POST["precio"]);
+      $pincho->setCeliaco($_POST["celiaco"]);
+  
       
       // The user of the Post is the currentUser (user in session)
-      $post->setAuthor($this->currentUser);
-			 
+       
       try {
-	// validate Post object
-	$post->checkIsValidForCreate(); // if it fails, ValidationException
-	
-	// save the Post object into the database
-	$this->postMapper->save($post);
-	
-	// POST-REDIRECT-GET
-	// Everything OK, we will redirect the user to the list of posts
-	// We want to see a message after redirection, so we establish
-	// a "flash" message (which is simply a Session variable) to be
-	// get in the view after redirection.
-	$this->view->setFlash("Post \"".$post ->getTitle()."\" successfully added.");
-	
-	// perform the redirection. More or less: 
-	// header("Location: index.php?controller=posts&action=index")
-	// die();
-	$this->view->redirect("posts", "index");
-	
+  // validate Post object
+  $pincho->checkIsValidForCreate(); // if it fails, ValidationException
+  
+  // save the Post object into the database
+  $this->pinchoMapper->save($pincho);
+  
+  // POST-REDIRECT-GET
+  // Everything OK, we will redirect the user to the list of posts
+  // We want to see a message after redirection, so we establish
+  // a "flash" message (which is simply a Session variable) to be
+  // get in the view after redirection.
+  $this->view->setFlash("Pincho \"".$pincho->getNombrePincho()."\" successfully added.");
+  
+  // perform the redirection. More or less: 
+  // header("Location: index.php?controller=posts&action=index")
+  // die();
+  $this->view->redirect("Pincho", "pinchos");
+  
       }catch(ValidationException $ex) {      
-	// Get the errors array inside the exepction...
-	$errors = $ex->getErrors();	
-	// And put it to the view as "errors" variable
-	$this->view->setVariable("errors", $errors);
+  // Get the errors array inside the exepction...
+  $errors = $ex->getErrors(); 
+  // And put it to the view as "errors" variable
+  $this->view->setVariable("errors", $errors);
       }
     }
     
     // Put the Post object visible to the view
-    $this->view->setVariable("post", $post);    
+    $this->view->setVariable("pincho", $pincho);    
     
     // render the view (/view/posts/add.php)
-    $this->view->render("posts", "add");
+    $this->view->render("pinchos", "add");
     
   }
   

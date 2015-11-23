@@ -3,21 +3,26 @@
  require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  
- $post = $view->getVariable("post");
+ $pincho = $view->getVariable("pincho");
  $errors = $view->getVariable("errors");
  
- $view->setVariable("title", "Edit Post");
+ $view->setVariable("pincho", "view Pincho");
  
-?><h1><?= i18n("Create post")?></h1>
-      <form action="index.php?controller=posts&amp;action=add" method="POST">
-	    <?= i18n("Title") ?>: <input type="text" name="title" 
-			     value="<?= $post->getTitle() ?>">
-	    <?= isset($errors["title"])?$errors["title"]:"" ?><br>
+?><h1>añadir pincho</h1>
+      <form action="index.php?controller=pincho&amp;action=add" method="POST">
+	  	
+	  	 Nombre: <input type="text" name="nombrePincho"  value="<?= $pincho->getNombrePincho() ?>">
+	    <?= isset($errors["nombrePincho"])?$errors["nombrePincho"]:"" ?><br>
 	    
-	    <?= i18n("Contents") ?>: <br>
-	    <textarea name="content" rows="4" cols="50"><?= 
-	    $post->getContent() ?></textarea>
-	    <?= isset($errors["content"])?$errors["content"]:"" ?><br>
+	    Descripcion: <br>
+	    <textarea name="descripcion" rows="4" cols="50"><?=    $pincho->getDescripcionPincho() ?></textarea>
+	    <?= isset($errors["descripcion"])?$errors["descripcion"]:"" ?><br>
+
+	    precio: <input type="text" name="precio"  value="<?= $pincho->getPrecio() ?>">
+	    <?= isset($errors["precio"])?$errors["precio"]:"" ?><br>
+
+	    celiaco: <input type="text" name="celiaco"  value="<?= $pincho->getCeliaco() ?>">
+	    <?= isset($errors["celiaco"])?$errors["celiaco"]:"" ?><br>
 	    
 	    <input type="submit" name="submit" value="submit">
       </form>

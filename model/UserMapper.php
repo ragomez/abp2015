@@ -34,7 +34,7 @@ class UserMapper {
    */      
   public function save($user) {
     if($user->getTipo() == "Jurado popular"){
-      $stmt = $this->db->prepare("INSERT INTO juradoPopular values (?,?,?,?,?,?,?,?,?)");
+      $stmt = $this->db->prepare("INSERT INTO juradopopular values (?,?,?,?,?,?,?,?,?)");
       $stmt->execute(array($user->getIdJuradoPopular(),$user->getlogin(),$user->getPasswd(),$user->getDni(),$user->getName(),
         $user->getApellidos(),$user->getMail(),$user->getTelefono(),$user->getTipo()));    
     }
