@@ -1,0 +1,36 @@
+<script src="archivos/jquery.js"></script>
+<script src="archivos/modernizr.js"></script>
+<script src="archivos/bootstrap.js"></script>
+<script src="archivos/menustick.js"></script>
+<script src="archivos/parallax.js"></script>
+<script src="archivos/easing.js"></script>
+<script src="archivos/wow.js"></script>
+<script src="archivos/smoothscroll.js"></script>
+<script src="archivos/masonry.js"></script>
+<script src="archivos/imgloaded.js"></script>
+<script src="archivos/classie.js"></script>
+<script src="archivos/colorfinder.js"></script>
+<script src="archivos/gridscroll.js"></script>
+<script src="archivos/contact.js"></script>
+<script src="archivos/common.js"></script>
+
+<script type="text/javascript">
+jQuery(function($) {
+$(document).ready( function() {
+  //enabling stickUp on the '.navbar-wrapper' class
+	$('.navbar-wrapper').stickUp({
+		parts: {
+		  0: 'banner',
+		  1: 'aboutus',
+		  2: 'specialties',
+		  3: 'gallery',
+		  4: 'feedback',
+		  5: 'contact'
+		},
+		itemClass: 'menuItem',
+		itemHover: 'active',
+		topMargin: 'auto'
+		});
+	});
+});
+</script>

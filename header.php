@@ -1,0 +1,47 @@
+<?php 
+	
+include ("includesCSS/includeCss.html");
+?>
+<header>
+	<div class="banner row" id="banner">		
+		<div class="parallax text-center" style="background-image: url(&quot;archivos/19.jpg&quot;); background-position: 30% -53px;">
+			<div class="parallax-pattern-overlay">
+				<div class="container text-center" style="height:580px;padding-top:170px;">
+					<a href="#"><img  src="archivos/logo.png" alt="logo"></a>
+					<h2 style="visibility: visible; animation-name: zoomIn;" class="intro wow zoomIn animated" wow-data-delay="0.4s" wow-data-duration="0.9s">Catering &amp; Special Events</h2>
+				</div>
+
+			</div>
+		</div>
+	</div>	
+
+	<div class="menu">
+		<div style="position: fixed; top: 0px;" class="navbar-wrapper stuckMenu isFixed">
+			<div class="container">
+				<div class="navwrapper">
+					<div class="navbar navbar-inverse navbar-static-top">
+						<div class="container">
+							<div class="navArea">
+								<div class="navbar-collapse collapse">
+									<ul class="nav navbar-nav">
+										<li class="menuItem"><a href="#wrapper">Home</a></li>
+										<li class="menuItem"><a href="#aboutus">About Us</a></li>
+										<li class="menuItem"><a href="#gallery">Events Gallery</a></li>
+										<li class="menuItem"><a href="#feedback">Feedback</a></li>							
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+
+</header>
+
+<?php 
+	
+include ("includesCSS/includeJavascript.html");
+?>
