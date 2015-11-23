@@ -139,7 +139,7 @@ class PinchoController extends BaseController {
   // perform the redirection. More or less: 
   // header("Location: index.php?controller=posts&action=index")
   // die();
-  $this->view->redirect("Pincho", "pinchos");
+  $this->view->redirect("Pincho", "view");
   
       }catch(ValidationException $ex) {      
   // Get the errors array inside the exepction...
