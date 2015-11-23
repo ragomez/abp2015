@@ -92,17 +92,27 @@ Class JuradoProfesional{
 
   	public function checkIsValidForCreate() {
     	$errors = array();
-     	if (strlen(trim($this->title)) == 0 ) {
-			$errors["title"] = "title is mandatory";
+     	if (strlen(trim($this->idJuradoProfesional)) == 0 ) {
+			$errors["idJuradoProfesional"] = "El ID es obligatorio";
 	     }
-	    if (strlen(trim($this->content)) == 0 ) {
-			$errors["content"] = "content is mandatory";
+	    if (strlen(trim($this->dni)) == 0 ) {
+			$errors["dni"] = "El DNI es obligatorio";
 	    }
-	    if ($this->author == NULL ) {
-			$errors["author"] = "author is mandatory";
-	    }
+      if (strlen(trim($this->nombre)) == 0 ) {
+      $errors["nombre"] = "El nombre es obligatorio";
+      }
+      if (strlen(trim($this->apellido)) == 0 ) {
+      $errors["apellido"] = "El apellido es obligatorio";
+      }
+	    if (strlen(trim($this->login)) == 0 ) {
+      $errors["login"] = "El login es obligatorio";
+      }
+      if (strlen(trim($this->password)) == 0 ) {
+      $errors["password"] = "La contraseña es obligatoria";
+      }
+
 	    if (sizeof($errors) > 0){
-			throw new ValidationException($errors, "post is not valid");
+			throw new ValidationException($errors, "No se ha podido realizar el alta");
 	    }
   	}
 
