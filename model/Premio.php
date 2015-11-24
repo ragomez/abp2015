@@ -12,17 +12,17 @@ Class Premio{
 	private	$importePopular;
 	private $importeProfesional;
 	private $fechaPremio;
-	private $Patrocinador_idPatrocinador;
+	private $patrocinador_idPatrocinador;
 
 
 
 	public function __construct($idPremio=NULL, $importePopular=NULL, $importeProfesional=NULL,
-                     $fechaPremio = NULL, $Patrocinador_idPatrocinador = NULL) {
+                     $fechaPremio = NULL, $patrocinador_idPatrocinador = NULL) {
 	    $this->idPremio = $idPremio;
 	    $this->importePopular = $importePopular;
 	    $this->importeProfesional = $importeProfesional;
 	    $this->fechaPremio = $fechaPremio;
-	    $this->Patrocinador_idPatrocinador = $Patrocinador_idPatrocinador;  
+	    $this->patrocinador_idPatrocinador = $patrocinador_idPatrocinador;  
   	}
 
 
@@ -47,7 +47,7 @@ Class Premio{
   
 
   	public function getPatrocinador_idPatrocinador() {
-    	return $this->Patrocinador_idPatrocinador;
+    	return $this->patrocinador_idPatrocinador;
   	}
     
 	
@@ -68,30 +68,37 @@ Class Premio{
     	$this->fechaPremio = $fechaPremio;
   	}
 
-  	public function setPatrocinador_idPatrocinador($Patrocinador_idPatrocinador) {
-    	$this->Patrocinador_idPatrocinador = $Patrocinador_idPatrocinador;
+  	public function setPatrocinador_idPatrocinador($patrocinador_idPatrocinador) {
+    	$this->patrocinador_idPatrocinador = $patrocinador_idPatrocinador;
   	}
  
 
 
-  	public function checkIsValidForCreate() {
+  	public function checkIsValidForCreate() 
+    {
     	$errors = array();
-     	if (strlen(trim($this->idPremio)) == 0 ) {
+     	if (strlen(trim($this->idPremio)) == 0 ) 
+      {
 			$errors["idPremio"] = "El idPremio es obligatorio";
 	     }
-	    if ((strlen(trim($this->importePopular)) == 0 ) && (strlen(trim($this->importeProfesional)) == 0 )) {
+	    if ((strlen(trim($this->importePopular)) == 0 ) && 
+          (strlen(trim($this->importeProfesional)) == 0 )) 
+      {
 			$errors["importePopular"] = "Un premio es obligatorio";
       $errors["importeProfesional"] = "Un premio es obligatorio";
 	    }
-      
-	    if ($this->fechaPremio == 0 ) {
+
+	    if ($this->fechaPremio == 0 )
+      {
 			$errors["fechaPremio"] = "La fecha del premio es obligatoria";
 	    }
-      if ($this->Patrocinador_idPatrocinador == 0 ) {
-      $errors["Patrocinador_idPatrocinador"] = "La ID del patrocinador es obligatoria";
+      if ($this->patrocinador_idPatrocinador == 0 )
+      {
+      $errors["patrocinador_idPatrocinador"] = "La ID del patrocinador es obligatoria";
       }
-	    if (sizeof($errors) > 0){
-			throw new ValidationException($errors, "post is not valid");
+	    if (sizeof($errors) > 0)
+      {
+			throw new ValidationException($errors, "Premio is not valid");
 	    }
   	}
 

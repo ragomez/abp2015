@@ -45,7 +45,7 @@ class PremioMapper {
         $premio["importePopular"],
         $premio["importeProfesional"],
         $premio["fechaPremio"],
-        $premio["Patrocinador_idPatrocinador"]);
+        $premio["patrocinador_idPatrocinador"]);
     }   
 
     return $listaPremios;
@@ -70,7 +70,7 @@ class PremioMapper {
         $premio["importePopular"],
         $premio["importeProfesional"],
         $premio["fechaPremio"],
-        $premio["Patrocinador_idPatrocinador"]);
+        $premio["patrocinador_idPatrocinador"]);
     } else {
       return NULL;
     }   
@@ -85,8 +85,8 @@ class PremioMapper {
    */    
   public function save(Premio $premio) {
     $stmt = $this->db->prepare("INSERT INTO premio(idPremio,importePopular,
-                                 importeProfesional, fechaPremio, Patrocinador_idPatrocinador)
-                                  values (?,?,?,?,?)");
+                              importeProfesional, fechaPremio,patrocinador_idPatrocinador)
+                              values (?,?,?,?,?)");
     $stmt->execute(array($premio->getIdPremio(), $premio->getImportePopular(),
                         $premio->getImporteProfesional(), $premio->getFechaPremio(),
                         $premio->getPatrocinador_idPatrocinador());    
@@ -101,7 +101,8 @@ class PremioMapper {
    */     
   public function update(Premio $premio) {
     $stmt = $this->db->prepare("UPDATE premio set idPremio=?, importePopular=? ,
-                               importeProfesional=?, fechaPremio=?, Patrocinador_idPatrocinador =?, where id=?");
+                              importeProfesional=?, fechaPremio=?,
+                              patrocinador_idPatrocinador =?, where id=?");
     $stmt->execute(array($premio->getIdPremio(), $premio->getImportePopular(),
                         $premio->getImporteProfesional(), $premio->getFechaPremio(),
                         $premio->getPatrocinador_idPatrocinador());
