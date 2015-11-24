@@ -65,7 +65,7 @@ class PinchoMapper {
     $pincho = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if(!sizeof($pincho) == 0) {
-      return new pincho(
+      return new Pincho(
 	$pincho["idPincho"],
   $pincho["nombrePincho"],
 	$pincho["descripcion"],
