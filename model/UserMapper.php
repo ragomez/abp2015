@@ -87,6 +87,6 @@ class UserMapper {
     if ($stmt->fetchColumn() > 0) {
       return true;        
     }
-
   }
+  
 }
