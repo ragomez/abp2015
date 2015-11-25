@@ -10,7 +10,7 @@
  
 ?>
 <h1>Añadir premio</h1>
-      <form action="index.php?controller=premio&amp;action=add" method="POST">
+      <form action="index.php?controller=premios&amp;action=add" method="POST">
 	  	
 	  	 Id Premio: <input type="text" name="nombrePremio"  value="<?= $premio->getNombrePremio() ?>">
 	    <?= isset($errors["nombrePremio"])?$errors["nombrePremio"]:"" ?><br>
