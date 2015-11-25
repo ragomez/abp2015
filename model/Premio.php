@@ -1,14 +1,13 @@
-
-
-
 <?php
 
+require_once(__DIR__."/../core/ValidationException.php");
 
-Class Premio{
+class Premio{
 
 
 
 	private $idPremio;
+  private $nombrePremio;
 	private	$importePopular;
 	private $importeProfesional;
 	private $fechaPremio;
@@ -16,9 +15,10 @@ Class Premio{
 
 
 
-	public function __construct($idPremio=NULL, $importePopular=NULL, $importeProfesional=NULL,
+	public function __construct($idPremio=NULL, $nombrePremio=NULL ,$importePopular=NULL, $importeProfesional=NULL,
                      $fechaPremio = NULL, $patrocinador_idPatrocinador = NULL) {
 	    $this->idPremio = $idPremio;
+      $this->nombrePremio = $nombrePremio;
 	    $this->importePopular = $importePopular;
 	    $this->importeProfesional = $importeProfesional;
 	    $this->fechaPremio = $fechaPremio;
@@ -29,6 +29,10 @@ Class Premio{
   	public function getIdPremio() {
     	return $this->idPremio;
   	}
+
+    public function getNombrePremio(){
+      return $this->nombrePremio;
+    }
   
 
   	public function getImportePopular() {
@@ -51,10 +55,14 @@ Class Premio{
   	}
     
 	
-
-	public function setIdPremio($idPremio) {
+    /* ID controlada por BBDD 
+	 public function setIdPremio($idPremio) {
     	$this->idPremio = $idPremio;
   	}
+    */
+    public function setNombrePremio($nombrePremio){
+      $this->nombrePremio = $nombrePremio;
+    }
 
   	public function setImportePopular($importePopular) {
     	$this->importePopular = $importePopular;
@@ -77,10 +85,12 @@ Class Premio{
   	public function checkIsValidForCreate() 
     {
     	$errors = array();
+     /*
      	if (strlen(trim($this->idPremio)) == 0 ) 
       {
 			$errors["idPremio"] = "El idPremio es obligatorio";
 	     }
+      */ 
 	    if ((strlen(trim($this->importePopular)) == 0 ) && 
           (strlen(trim($this->importeProfesional)) == 0 )) 
       {
@@ -96,6 +106,12 @@ Class Premio{
       {
       $errors["patrocinador_idPatrocinador"] = "La ID del patrocinador es obligatoria";
       }
+
+      if ($this->nombrePremio == 0 )
+      {
+      $errors["nombrePremio"] = "El nombre del premio  es obligatorio";
+      }
+
 	    if (sizeof($errors) > 0)
       {
 			throw new ValidationException($errors, "Premio is not valid");

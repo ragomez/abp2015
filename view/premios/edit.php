@@ -7,15 +7,15 @@
  $premio = $view->getVariable("premio");
  $errors = $view->getVariable("errors");
  
- $view->setVariable("idPremio", "Edit Premio");
+ $view->setVariable("premio", "Edit Premio");
  
 ?>
-<h1><?= i18n("Modify premio") ?></h1>
+<h1><?= i18n("Modificar premio") ?></h1>
 <form action="index.php?controller=premios&amp;action=edit" method="POST">
       
-      <?= i18n("IdPremio") ?>: <input type="text" name="idPremio" 
-      value="<?= isset($_POST["idPremio"])?$_POST["idPremio"]:$premio->getIdPremio() ?>">
-      <?= isset($errors["idPremio"])?$errors["idPremio"]:"" ?><br>
+      <?= i18n("nombrePremio") ?>: <input type="text" name="nombrePremio" 
+      value="<?= isset($_POST["nombrePremio"])?$_POST["nombrePremio"]:$premio->getNombrePremio() ?>">
+      <?= isset($errors["nombrePremio"])?$errors["nombrePremio"]:"" ?><br>
       
       <?= i18n("ImportePopular") ?>: <input type="text" name="importePopular" 
       value="<?= isset($_POST["importePopular"])?$_POST["importePopular"]:$premio->getImportePopular() ?>">
@@ -34,7 +34,7 @@
       <?= isset($errors["patrocinador_idPatrocinador"])?$errors["patrocinador_idPatrocinador"]:"" ?><br>
           
       
-      <input type="hidden" name="id" value="<?= $post->getId() ?>">
-      <input type="submit" name="submit" value="<?= i18n("Modify post") ?>">
+      <input type="hidden" name="id" value="<?= $premio->getNombrePremio() ?>">
+      <input type="submit" name="submit" value="<?= i18n("Modificar premio") ?>">
 </form>
     

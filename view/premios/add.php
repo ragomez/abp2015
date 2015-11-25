@@ -8,11 +8,12 @@
  
  $view->setVariable("premio", "view Premio");
  
-?><h1>añadir premio</h1>
-      <form action="index.php?controller=premios&amp;action=add" method="POST">
+?>
+<h1>Añadir premio</h1>
+      <form action="index.php?controller=premio&amp;action=add" method="POST">
 	  	
-	  	 Id Premio: <input type="text" name="idPremio"  value="<?= $premio->getIdPremio() ?>">
-	    <?= isset($errors["idPremio"])?$errors["idPremio"]:"" ?><br>
+	  	 Id Premio: <input type="text" name="nombrePremio"  value="<?= $premio->getNombrePremio() ?>">
+	    <?= isset($errors["nombrePremio"])?$errors["nombrePremio"]:"" ?><br>
 	    
 	     Importe Popular: <input type="text" name="importePopular"  value="<?= $premio->getImportePopular() ?>">
 	    <?= isset($errors["importePopular"])?$errors["importePopular"]:"" ?><br>

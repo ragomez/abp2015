@@ -43,7 +43,7 @@ include ("includesCSS/includeCss.html");
 							<li class=" col-md-3">
 								<figure>
 																		
-									<figcaption><h3><?= $premio->getIdPremio() ?></h3>
+									<figcaption><h3><?= $premio->getNombrePremio() ?></h3>
 										<p>Importe Popular 		:<?= $premio->getImportePopular() ?> euros </p>
 										<p>Importe Profesional  :<?= $premio->getImporteProfesional() ?> euros </p>
 										<p>Fecha 				:<?= $pincho->getFechaPremio() ?>  </p>

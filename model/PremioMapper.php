@@ -45,7 +45,8 @@ class PremioMapper {
         $premio["importePopular"],
         $premio["importeProfesional"],
         $premio["fechaPremio"],
-        $premio["patrocinador_idPatrocinador"]);
+        $premio["patrocinador_idPatrocinador"],
+        $premio["nombrePremio"]);
     }   
 
     return $listaPremios;
@@ -59,19 +60,23 @@ class PremioMapper {
    * @return - Premio The Premio instances (without comments).  
    *         - NULL if the Premio is not found
    */    
-  public function findById($idPremio){
-    $stmt = $this->db->prepare("SELECT * FROM premio WHERE idPremio=?");
-    $stmt->execute(array($idPremio));
+  public function findById($nombrePremio){
+    $stmt = $this->db->prepare("SELECT * FROM premio WHERE nombrePremio=?");
+    $stmt->execute(array($nombrePremio));
     $premio = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    if(!sizeof($premio) == 0) {
+    if(!sizeof($premio) == 0) 
+    {
       return new Premio(
         $premio["idPremio"],
         $premio["importePopular"],
         $premio["importeProfesional"],
         $premio["fechaPremio"],
-        $premio["patrocinador_idPatrocinador"]);
-    } else {
+        $premio["patrocinador_idPatrocinador"]
+        $premio["nombrePremio"]);
+    } 
+    else 
+    {
       return NULL;
     }   
   }
@@ -85,11 +90,12 @@ class PremioMapper {
    */    
   public function save(Premio $premio) {
     $stmt = $this->db->prepare("INSERT INTO premio(idPremio,importePopular,
-                              importeProfesional, fechaPremio,patrocinador_idPatrocinador)
-                              values (?,?,?,?,?)");
+                              importeProfesional, fechaPremio,patrocinador_idPatrocinador,
+                              nombrePremio)
+                              values (?,?,?,?,?,?)");
     $stmt->execute(array($premio->getIdPremio(), $premio->getImportePopular(),
                         $premio->getImporteProfesional(), $premio->getFechaPremio(),
-                        $premio->getPatrocinador_idPatrocinador());    
+                        $premio->getPatrocinador_idPatrocinador(), $premio->getNombrePremio());    
   }
 
   /**
@@ -100,12 +106,13 @@ class PremioMapper {
    * @return void
    */     
   public function update(Premio $premio) {
-    $stmt = $this->db->prepare("UPDATE premio set idPremio=?, importePopular=? ,
+    $stmt = $this->db->prepare("UPDATE premio set  importePopular=? ,
                               importeProfesional=?, fechaPremio=?,
-                              patrocinador_idPatrocinador =?, where id=?");
-    $stmt->execute(array($premio->getIdPremio(), $premio->getImportePopular(),
-                        $premio->getImporteProfesional(), $premio->getFechaPremio(),
-                        $premio->getPatrocinador_idPatrocinador());
+                              patrocinador_idPatrocinador =?, nombrePremio = ? where idPremio=?");
+
+    $stmt->execute(array($premio->getImportePopular(),$premio->getImporteProfesional(),
+                        $premio->getFechaPremio(),$premio->getPatrocinador_idPatrocinador(),
+                        $premio->getNombrePremio());
   }
 
   /**

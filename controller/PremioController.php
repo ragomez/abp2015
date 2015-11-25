@@ -114,10 +114,12 @@ class PremioController extends BaseController {
     if (isset($_POST["submit"])) { // reaching via HTTP Post...
       
       // populate the Premio object with data form the form
+
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
-      $premio>setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
+      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"])
+      $premio->setNombrePremio($_POST["nombrePremio"]);
   
       
       // The user of the Premio is the currentUser (user in session)
@@ -134,7 +136,7 @@ class PremioController extends BaseController {
   // We want to see a message after redirection, so we establish
   // a "flash" message (which is simply a Session variable) to be
   // get in the view after redirection.
-  $this->view->setFlash("Premio \"".$premio->getIdPremio()."\" successfully added.");
+  $this->view->setFlash("Premio \"".$premio->getNombrePremio()."\" successfully added.");
   
   // perform the redirection. More or less: 
   // header("Location: index.php?controller=posts&action=index")
@@ -189,23 +191,25 @@ class PremioController extends BaseController {
    * @return void
    */  
   public function edit() {
-    if (!isset($_REQUEST["idPremio"])) {
-      throw new Exception("A premio id is mandatory");
+    if (!isset($_REQUEST["nombrePremio"])) {
+      throw new Exception("Es necesario un Nombre de premio");
     }
     
     if (!isset($this->currentUser)) {
-      throw new Exception("Not in session. Editing premio requires login");
+      throw new Exception("Not in session. Editar premio requiere loguearse");
     }
     
     
     // Get the Post object from the database
-    $premioid = $_REQUEST["idPremio"];
-    $premio = $this->premioMapper->findById($premioid);
+    
+    $premioNombre = $_REQUEST["nombrePremio"];
+    $premio = $this->premioMapper->findById($premioNombre);
     
     // Does the post exist?
     if ($premio == NULL) {
-      throw new Exception("no such premio with id: ".$premioid);
+      throw new Exception("Ningun premio con el nombre \"".$premioNombre. "\"");
     }
+
     
     // Check if the Post author is the currentUser (in Session)
    /** if ($post->getAuthor() != $this->currentUser) {
@@ -218,32 +222,34 @@ class PremioController extends BaseController {
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
-      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
+      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"])
+      $premio->setNombrePremio($_POST["nombrePremio"]);
       
       try {
 	// validate Post object
-	$premio->checkIsValidForUpdate(); // if it fails, ValidationException
+	       $premio->checkIsValidForUpdate(); // if it fails, ValidationException
 	
 	// update the Post object in the database
-	$this->premioMapper->update($premio);
+	       $this->premioMapper->update($premio);
 	
 	// POST-REDIRECT-GET
 	// Everything OK, we will redirect the user to the list of posts
 	// We want to see a message after redirection, so we establish
 	// a "flash" message (which is simply a Session variable) to be
 	// get in the view after redirection.
-	$this->view->setFlash(sprintf(i18n("Premio \"%s\" successfully updated."),$premio ->getIdPremio()));
+	       $this->view->setFlash(sprintf(i18n("Premio \"%s\" successfully updated."),$premio ->getNombrePremio()));
 	
 	// perform the redirection. More or less: 
 	// header("Location: index.php?controller=posts&action=index")
 	// die();
-	$this->view->redirect("premios", "index");	
+	       $this->view->redirect("premios", "index");	
 	
-      }catch(ValidationException $ex) {
+      }
+      catch(ValidationException $ex) {
 	// Get the errors array inside the exepction...
-	$errors = $ex->getErrors();
+	       $errors = $ex->getErrors();
 	// And put it to the view as "errors" variable
-	$this->view->setVariable("errors", $errors);
+	       $this->view->setVariable("errors", $errors);
       }
     }
     
@@ -275,20 +281,20 @@ class PremioController extends BaseController {
    * @return void
    */    
   public function delete() {  
-    if (!isset($_POST["idPremio"])) {
-      throw new Exception("id is mandatory");
+    if (!isset($_POST["nombrePremio"])) {
+      throw new Exception(" Nombre de premio es obligatorio");
     }
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Editing premios requires login");
     }
     
      // Get the Post object from the database
-    $premioid = $_REQUEST["idPremio"];
-    $premio = $this->premioMapper->findById($premioid);
+    $premioNombre = $_REQUEST["nombrePremio"];
+    $premio = $this->premioMapper->findById($premionombre);
     
     // Does the post exist?
     if ($premio == NULL) {
-      throw new Exception("no such premio with id: ".$premioid);
+      throw new Exception("Ningun premio con el nombre \"".$premioNombre. "\"");
     }  
     
     // Check if the Post author is the currentUser (in Session)
@@ -305,7 +311,7 @@ class PremioController extends BaseController {
     // We want to see a message after redirection, so we establish
     // a "flash" message (which is simply a Session variable) to be
     // get in the view after redirection.
-    $this->view->setFlash("Premio \"".$premio ->getIdPremio()."\" successfully deleted.");    
+    $this->view->setFlash("Premio \"".$premio ->getNombrePremio()."\" successfully deleted.");    
     
     // perform the redirection. More or less: 
     // header("Location: index.php?controller=posts&action=index")
