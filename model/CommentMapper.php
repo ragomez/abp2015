@@ -10,10 +10,7 @@ require_once(__DIR__."/../model/Comment.php");
  *
  * Database interface for Comment entities
  * 
- *Tareas :
- *  -Nada.
- *Tareas realizadas:
- * - Correcion en llamadas a sentencias SQL(content, author, post,comments).
+ * @author lipido <lipido@gmail.com>
  */
 class CommentMapper {
  

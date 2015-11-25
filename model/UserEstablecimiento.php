@@ -76,7 +76,7 @@ class Establecimiento {
   } 
 
   public function getPincho_idPincho() {
-    return 2;
+    return  $this->Pincho_idPincho;
   } 
 
   public function getTipo(){

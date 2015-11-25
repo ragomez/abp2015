@@ -31,13 +31,11 @@
               <div class="navArea">
                 <div class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
-                    <li class="menuItem"><a href="view/pinchos/votacionPincho.php">Votar</a></li>
-                    <li class="menuItem"><a href="#aboutus">Ver todos los pinchos</a></li>
-                    <li class="menuItem"><a href="#gallery">Configuracion de cuenta</a></li>
-                    
-                    <?= isset($errors["general"])?$errors["general"]:"" ?>
-      
-                    <?php if (isset($user)){ ?>             
+                    <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosValidados">Listar todos los pinchos</a></li>
+                    <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=votarFormularioPopular">Votar</a></li>
+                    <li class="menuItem"><a href="#gallery">Configuracion de cuenta</a></li>                    
+                    <?= isset($errors["general"])?$errors["general"]:"" ?>      
+                    <?php if (isset($user)){ ?>            
                      
                       <li><a href="#"><?= sprintf("%s ", $user) ?></a></li>
                       <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>

@@ -69,7 +69,7 @@ $errors = $view->getVariable("errors");
 
       
 
-      <div class="tabs">
+  <div class="tabs">
     <!--pesta–a 1 activa por defecto-->
     <div class="tab">
         <input type="radio" id="tab-1" name="tab-group-1" checked>
@@ -137,7 +137,6 @@ $errors = $view->getVariable("errors");
         <div class="content">
               <!--contenido de la pesta–a 2-->
           <section class="contact" id="contact">
-
             <div class="container w960">
               <div class="row">                             
                 <h2>Formulario de registro de establecimiento</h2>               
@@ -183,7 +182,8 @@ $errors = $view->getVariable("errors");
 
         </div>
     </div>
-
+</div>
+</div>
 
    </body>
 </html>

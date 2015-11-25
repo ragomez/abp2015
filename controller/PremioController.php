@@ -73,7 +73,7 @@ class PremioController extends BaseController {
 
     
     // render the view (/view/posts/view.php)
-    $this->view->render("premios", "premios");
+    $this->view->render("premios", "view");
     
   }
   
@@ -104,6 +104,7 @@ class PremioController extends BaseController {
    * @throws Exception if no user is in session
    * @return void
    */
+  
   public function add() {
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Adding premio requires login");

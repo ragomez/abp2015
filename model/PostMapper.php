@@ -11,10 +11,7 @@ require_once(__DIR__."/../model/Comment.php");
  *
  * Database interface for Post entities
  * 
-  *Tareas Pendientes:
-  * - Nada.
- *Tareas realizadas:
- * - Correcion "posts" y "users" en llamadas a sentencias SQL.
+ * @author lipido <lipido@gmail.com>
  */
 class PostMapper {
 

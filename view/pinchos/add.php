@@ -1,14 +1,28 @@
+
+
 <?php 
- //file: view/posts/add.php
- require_once(__DIR__."/../../core/ViewManager.php");
+
+include ("includesCSS/includeCss.html");
+
+  require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  
  $pincho = $view->getVariable("pincho");
  $errors = $view->getVariable("errors");
  
  $view->setVariable("pincho", "view Pincho");
+
  
-?><h1>añadir pincho</h1>
+?>
+
+
+
+
+<section class="gallery" id="gallery">
+		<div class="container">
+			<div class="heading text-center">
+				
+			<h1>añadir pincho</h1>
       <form action="index.php?controller=pincho&amp;action=add" method="POST">
 	  	
 	  	 Nombre: <input type="text" name="nombrePincho"  value="<?= $pincho->getNombrePincho() ?>">
@@ -26,3 +40,9 @@
 	    
 	    <input type="submit" name="submit" value="submit">
       </form>
+			</div>
+	</section>
+
+<?php 
+	include ("includesCSS/includeJavascript.html");
+?>

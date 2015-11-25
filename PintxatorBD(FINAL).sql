@@ -8,154 +8,185 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema abp
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `abp` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema abp
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `abp` DEFAULT CHARACTER SET utf8 ;
 SHOW WARNINGS;
-USE `mydb` ;
+USE `abp` ;
+
 
 -- -----------------------------------------------------
--- Table `mydb`.`pincho`
+-- Table `abp`.`usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`pincho` ;
+
+DROP TABLE IF EXISTS `abp`.`usuario` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`pincho` (
+CREATE TABLE IF NOT EXISTS `abp`.`usuario` (
+  `login` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `tipo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`login`))
+ENGINE = InnoDB;
+
+SHOW WARNINGS;
+CREATE UNIQUE INDEX `loginUsuario_UNIQUE` ON `abp`.`usuario` (`login` ASC);
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `abp`.`pincho`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `abp`.`pincho` ;
+
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `abp`.`pincho` (
   `idPincho` INT NOT NULL AUTO_INCREMENT,
   `nombrePincho` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(45) NOT NULL,
+  `precio` INT NOT NULL,
   `celiaco` VARCHAR(2) NOT NULL,
   `estado` TINYINT(1) NOT NULL,
   `ganadorPopular` VARCHAR(45) NULL,
   `ganadorProfesional` VARCHAR(45) NULL,
   `puntosPopular` INT NULL,
   `mediaPuntosProfesional` INT NULL,
-  `precio` INT NOT NULL,
+  `imagen` VARCHAR(100) ,
   PRIMARY KEY (`idPincho`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idPincho_UNIQUE` ON `mydb`.`pincho` (`idPincho` ASC);
+CREATE UNIQUE INDEX `idPincho_UNIQUE` ON `abp`.`pincho` (`idPincho` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`establecimiento`
+-- Table `abp`.`establecimiento`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`establecimiento` ;
+DROP TABLE IF EXISTS `abp`.`establecimiento` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`establecimiento` (
+CREATE TABLE IF NOT EXISTS `abp`.`establecimiento` (
   `idEstablecimiento` INT NOT NULL AUTO_INCREMENT,
-  `nombreEstablecimiento` VARCHAR(45) NOT NULL,
-  `direccion` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   `cif` VARCHAR(20) NOT NULL,
+  `nombreEstablecimiento` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,  
   `horario` VARCHAR(30) NOT NULL,
   `paginaWeb` VARCHAR(45) NOT NULL,
   `telefono` INT NOT NULL,
   `Pincho_idPincho` INT NOT NULL,
-  `login` VARCHAR(45) NOT NULL,
+  `tipo` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`idEstablecimiento`, `Pincho_idPincho`),
   CONSTRAINT `fk_Establecimiento_Pincho1`
     FOREIGN KEY (`Pincho_idPincho`)
-    REFERENCES `mydb`.`pincho` (`idPincho`)
+    REFERENCES `abp`.`pincho` (`idPincho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idEstablecimiento_UNIQUE` ON `mydb`.`establecimiento` (`idEstablecimiento` ASC);
+CREATE UNIQUE INDEX `idEstablecimiento_UNIQUE` ON `abp`.`establecimiento` (`idEstablecimiento` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_Establecimiento_Pincho1_idx` ON `mydb`.`establecimiento` (`Pincho_idPincho` ASC);
+CREATE INDEX `fk_Establecimiento_Pincho1_idx` ON `abp`.`establecimiento` (`Pincho_idPincho` ASC);
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `login_UNIQUE` ON `mydb`.`establecimiento` (`login` ASC);
+CREATE UNIQUE INDEX `login_UNIQUE` ON `abp`.`establecimiento` (`login` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`juradoprofesional`
+-- Table `abp`.`juradoprofesional`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`juradoprofesional` ;
+DROP TABLE IF EXISTS `abp`.`juradoprofesional` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`juradoprofesional` (
+CREATE TABLE IF NOT EXISTS `abp`.`juradoprofesional` (
   `idJuradoProfesional` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
   `dni` VARCHAR(9) NOT NULL,
-  `telefono` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `login` VARCHAR(45) NOT NULL,
+  `telefono` INT NOT NULL,
+  `tipo` VARCHAR(15) NOT NULL,
+  
+  
   PRIMARY KEY (`idJuradoProfesional`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idJuradoProfesional_UNIQUE` ON `mydb`.`juradoprofesional` (`idJuradoProfesional` ASC);
+CREATE UNIQUE INDEX `idJuradoProfesional_UNIQUE` ON `abp`.`juradoprofesional` (`idJuradoProfesional` ASC);
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `login_UNIQUE` ON `mydb`.`juradoprofesional` (`login` ASC);
+CREATE UNIQUE INDEX `login_UNIQUE` ON `abp`.`juradoprofesional` (`login` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`juradopopular`
+-- Table `abp`.`juradopopular`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`juradopopular` ;
+DROP TABLE IF EXISTS `abp`.`juradopopular` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`juradopopular` (
-  `mail` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `abp`.`juradopopular` (  
   `idJuradoPopular` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
+  `login` VARCHAR(45) NOT NULL,  
   `password` VARCHAR(45) NOT NULL,
   `dni` VARCHAR(9) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
   `apellidos` VARCHAR(45) NOT NULL,
+  `mail` VARCHAR(45) NOT NULL,
   `telefono` INT NOT NULL,
-  `login` VARCHAR(45) NOT NULL,
+  `tipo` VARCHAR(15) NOT NULL,
+  
   PRIMARY KEY (`idJuradoPopular`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idUsuario_UNIQUE` ON `mydb`.`juradopopular` (`idJuradoPopular` ASC);
+CREATE UNIQUE INDEX `idUsuario_UNIQUE` ON `abp`.`juradopopular` (`idJuradoPopular` ASC);
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `login_UNIQUE` ON `mydb`.`juradopopular` (`login` ASC);
+CREATE UNIQUE INDEX `login_UNIQUE` ON `abp`.`juradopopular` (`login` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`administrador`
+-- Table `abp`.`administrador`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`administrador` ;
+DROP TABLE IF EXISTS `abp`.`administrador` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`administrador` (
+CREATE TABLE IF NOT EXISTS `abp`.`administrador` (
   `idAdministrador` INT NOT NULL AUTO_INCREMENT,
-  `mailAdmin` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
   `login` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `mailAdmin` VARCHAR(45) NOT NULL,
+  `tipo` VARCHAR(15) NOT NULL,
+  
   PRIMARY KEY (`idAdministrador`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idAdministrador_UNIQUE` ON `mydb`.`administrador` (`idAdministrador` ASC);
+CREATE UNIQUE INDEX `idAdministrador_UNIQUE` ON `abp`.`administrador` (`idAdministrador` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`folleto`
+-- Table `abp`.`folleto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`folleto` ;
+DROP TABLE IF EXISTS `abp`.`folleto` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`folleto` (
+CREATE TABLE IF NOT EXISTS `abp`.`folleto` (
   `idFolleto` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(25) NOT NULL,
   `descripcion` TEXT(200) NOT NULL,
@@ -165,74 +196,75 @@ CREATE TABLE IF NOT EXISTS `mydb`.`folleto` (
   PRIMARY KEY (`idFolleto`, `Administrador_idAdministrador`),
   CONSTRAINT `fk_Folleto_Administrador1`
     FOREIGN KEY (`Administrador_idAdministrador`)
-    REFERENCES `mydb`.`administrador` (`idAdministrador`)
+    REFERENCES `abp`.`administrador` (`idAdministrador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idFolleto_UNIQUE` ON `mydb`.`folleto` (`idFolleto` ASC);
+CREATE UNIQUE INDEX `idFolleto_UNIQUE` ON `abp`.`folleto` (`idFolleto` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_Folleto_Administrador1_idx` ON `mydb`.`folleto` (`Administrador_idAdministrador` ASC);
+CREATE INDEX `fk_Folleto_Administrador1_idx` ON `abp`.`folleto` (`Administrador_idAdministrador` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`patrocinador`
+-- Table `abp`.`patrocinador`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`patrocinador` ;
+DROP TABLE IF EXISTS `abp`.`patrocinador` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`patrocinador` (
+CREATE TABLE IF NOT EXISTS `abp`.`patrocinador` (
   `idPatrocinador` INT NOT NULL AUTO_INCREMENT,
   `nombrePatrocinador` VARCHAR(45) NOT NULL,
-  `telefonoPatrocinador` INT NOT NULL,
   `importe` DECIMAL(10,0) NOT NULL,
+  `telefonoPatrocinador` INT NOT NULL,
+  
   PRIMARY KEY (`idPatrocinador`))
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idPatrocinador_UNIQUE` ON `mydb`.`patrocinador` (`idPatrocinador` ASC);
+CREATE UNIQUE INDEX `idPatrocinador_UNIQUE` ON `abp`.`patrocinador` (`idPatrocinador` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`premio`
+-- Table `abp`.`premio`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`premio` ;
+DROP TABLE IF EXISTS `abp`.`premio` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`premio` (
+CREATE TABLE IF NOT EXISTS `abp`.`premio` (
   `idPremio` INT NOT NULL AUTO_INCREMENT,
-  `fechaPremio` DATE NOT NULL,
   `importePopular` DECIMAL(10,0) NOT NULL,
   `importeProfesional` DECIMAL(10,0) NOT NULL,
+  `fechaPremio` DATE NOT NULL,  
   `Patrocinador_idPatrocinador` INT NOT NULL,
   `nombrePremio` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPremio`, `Patrocinador_idPatrocinador`),
   CONSTRAINT `fk_Premio_Patrocinador1`
     FOREIGN KEY (`Patrocinador_idPatrocinador`)
-    REFERENCES `mydb`.`patrocinador` (`idPatrocinador`)
+    REFERENCES `abp`.`patrocinador` (`idPatrocinador`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idPremio_UNIQUE` ON `mydb`.`premio` (`idPremio` ASC);
+CREATE UNIQUE INDEX `idPremio_UNIQUE` ON `abp`.`premio` (`idPremio` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_Premio_Patrocinador1_idx` ON `mydb`.`premio` (`Patrocinador_idPatrocinador` ASC);
+CREATE INDEX `fk_Premio_Patrocinador1_idx` ON `abp`.`premio` (`Patrocinador_idPatrocinador` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`votoprofesional`
+-- Table `abp`.`votoprofesional`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`votoprofesional` ;
+DROP TABLE IF EXISTS `abp`.`votoprofesional` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`votoprofesional` (
+CREATE TABLE IF NOT EXISTS `abp`.`votoprofesional` (
   `Pincho_idPincho` INT NOT NULL,
   `JuradoProfesional_idJuradoProfesional` INT NOT NULL,
   `puntuacionMedia` DECIMAL(10,0) NOT NULL,
@@ -244,31 +276,31 @@ CREATE TABLE IF NOT EXISTS `mydb`.`votoprofesional` (
   PRIMARY KEY (`Pincho_idPincho`, `JuradoProfesional_idJuradoProfesional`),
   CONSTRAINT `fk_VotoProfesinal_Pincho`
     FOREIGN KEY (`Pincho_idPincho`)
-    REFERENCES `mydb`.`pincho` (`idPincho`)
+    REFERENCES `abp`.`pincho` (`idPincho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_VotoProfesinal_JuradoProfesional1`
     FOREIGN KEY (`JuradoProfesional_idJuradoProfesional`)
-    REFERENCES `mydb`.`juradoprofesional` (`idJuradoProfesional`)
+    REFERENCES `abp`.`juradoprofesional` (`idJuradoProfesional`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_VotoProfesinal_Pincho_idx` ON `mydb`.`votoprofesional` (`Pincho_idPincho` ASC);
+CREATE INDEX `fk_VotoProfesinal_Pincho_idx` ON `abp`.`votoprofesional` (`Pincho_idPincho` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_VotoProfesinal_JuradoProfesional1_idx` ON `mydb`.`votoprofesional` (`JuradoProfesional_idJuradoProfesional` ASC);
+CREATE INDEX `fk_VotoProfesinal_JuradoProfesional1_idx` ON `abp`.`votoprofesional` (`JuradoProfesional_idJuradoProfesional` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`codigo`
+-- Table `abp`.`codigo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`codigo` ;
+DROP TABLE IF EXISTS `abp`.`codigo` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`codigo` (
+CREATE TABLE IF NOT EXISTS `abp`.`codigo` (
   `idCodigo` INT NOT NULL AUTO_INCREMENT,
   `codigoVotacion` INT NOT NULL,
   `Pincho_idPincho` INT NOT NULL,
@@ -276,26 +308,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`codigo` (
   PRIMARY KEY (`idCodigo`),
   CONSTRAINT `fk_Codigo_Pincho1`
     FOREIGN KEY (`Pincho_idPincho`)
-    REFERENCES `mydb`.`pincho` (`idPincho`)
+    REFERENCES `abp`.`pincho` (`idPincho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idCodigo_UNIQUE` ON `mydb`.`codigo` (`idCodigo` ASC);
+CREATE UNIQUE INDEX `idCodigo_UNIQUE` ON `abp`.`codigo` (`idCodigo` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_Codigo_Pincho1_idx` ON `mydb`.`codigo` (`Pincho_idPincho` ASC);
+CREATE INDEX `fk_Codigo_Pincho1_idx` ON `abp`.`codigo` (`Pincho_idPincho` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`gastromapa`
+-- Table `abp`.`gastromapa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`gastromapa` ;
+DROP TABLE IF EXISTS `abp`.`gastromapa` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`gastromapa` (
+CREATE TABLE IF NOT EXISTS `abp`.`gastromapa` (
   `idGastroMapa` INT NOT NULL,
   `coordenadas` DECIMAL(10,0) NOT NULL,
   `Establecimiento_idEstablecimiento` INT NOT NULL,
@@ -303,90 +335,130 @@ CREATE TABLE IF NOT EXISTS `mydb`.`gastromapa` (
   PRIMARY KEY (`idGastroMapa`, `Establecimiento_idEstablecimiento`, `Establecimiento_Pincho_idPincho`),
   CONSTRAINT `fk_GastroMapa_Establecimiento1`
     FOREIGN KEY (`Establecimiento_idEstablecimiento` , `Establecimiento_Pincho_idPincho`)
-    REFERENCES `mydb`.`establecimiento` (`idEstablecimiento` , `Pincho_idPincho`)
+    REFERENCES `abp`.`establecimiento` (`idEstablecimiento` , `Pincho_idPincho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = 'Las coordenadas las mete el administrador pero lo que importa es que se relacionen las coordenadas con el establecimiento\n';
 
 SHOW WARNINGS;
-CREATE UNIQUE INDEX `idGastroMapa_UNIQUE` ON `mydb`.`gastromapa` (`idGastroMapa` ASC);
+CREATE UNIQUE INDEX `idGastroMapa_UNIQUE` ON `abp`.`gastromapa` (`idGastroMapa` ASC);
 
 SHOW WARNINGS;
-CREATE INDEX `fk_GastroMapa_Establecimiento1_idx` ON `mydb`.`gastromapa` (`Establecimiento_idEstablecimiento` ASC, `Establecimiento_Pincho_idPincho` ASC);
+CREATE INDEX `fk_GastroMapa_Establecimiento1_idx` ON `abp`.`gastromapa` (`Establecimiento_idEstablecimiento` ASC, `Establecimiento_Pincho_idPincho` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`premiopincho`
+-- Table `abp`.`premiopincho`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`premiopincho` ;
+DROP TABLE IF EXISTS `abp`.`premiopincho` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`premiopincho` (
+CREATE TABLE IF NOT EXISTS `abp`.`premiopincho` (
   `Pincho_idPincho` INT NOT NULL,
   `Premio_idPremio` INT NOT NULL,
   PRIMARY KEY (`Pincho_idPincho`, `Premio_idPremio`),
   CONSTRAINT `fk_Premio_pincho_Pincho1`
     FOREIGN KEY (`Pincho_idPincho`)
-    REFERENCES `mydb`.`pincho` (`idPincho`)
+    REFERENCES `abp`.`pincho` (`idPincho`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Premio_pincho_Premio1`
     FOREIGN KEY (`Premio_idPremio`)
-    REFERENCES `mydb`.`premio` (`idPremio`)
+    REFERENCES `abp`.`premio` (`idPremio`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_Premio_pincho_Premio1_idx` ON `mydb`.`premiopincho` (`Premio_idPremio` ASC);
+CREATE INDEX `fk_Premio_pincho_Premio1_idx` ON `abp`.`premiopincho` (`Premio_idPremio` ASC);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `mydb`.`votopopular`
+-- Table `abp`.`votopopular`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`votopopular` ;
+DROP TABLE IF EXISTS `abp`.`votopopular` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`votopopular` (
+CREATE TABLE IF NOT EXISTS `abp`.`votopopular` (
   `contadorVotosPop` INT NULL,
   `idJuradoPopular` INT NOT NULL,
   `idCodigo` INT NOT NULL,
   PRIMARY KEY (`idJuradoPopular`, `idCodigo`),
   CONSTRAINT `fk_VotoPopular_1`
     FOREIGN KEY (`idJuradoPopular`)
-    REFERENCES `mydb`.`juradopopular` (`idJuradoPopular`)
+    REFERENCES `abp`.`juradopopular` (`idJuradoPopular`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_VotoPopular_2`
     FOREIGN KEY (`idCodigo`)
-    REFERENCES `mydb`.`codigo` (`idCodigo`)
+    REFERENCES `abp`.`codigo` (`idCodigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SHOW WARNINGS;
-CREATE INDEX `fk_VotoPopular_2_idx` ON `mydb`.`votopopular` (`idCodigo` ASC);
+CREATE INDEX `fk_VotoPopular_2_idx` ON `abp`.`votopopular` (`idCodigo` ASC);
 
 SHOW WARNINGS;
 
--- -----------------------------------------------------
--- Table `mydb`.`users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`users` ;
 
-SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
-  `Login` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
-  `Tipo` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Login`))
-ENGINE = InnoDB;
 
-SHOW WARNINGS;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `administrador`(`login`, `password`, `mailAdmin`, `tipo`) VALUES 
+("admin","admin","admin@admin.com","Administrador");
+
+
+
+INSERT INTO `juradopopular`(`login`, `password`, `dni`, `nombre`, `apellidos`, `mail`, `telefono`, `tipo`) VALUES 
+("mcpaz","mcpaz","121223242","mcpaz","mcpaz","mcpaz",988272666,"Jurado popular");
+
+INSERT INTO `juradopopular`( `login`, `password`, `dni`, `nombre`, `apellidos`, `mail`, `telefono`, `tipo`) VALUES 
+("jesus","jesus","121223242","jesus","jesus","jesus",988272666,"Jurado popular");
+
+
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("mcpaz","mcpaz","Jurado popular");
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("jesus","jesus","Jurado popular");
+
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("admin","admin","Administrador");
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("restaurante","restaurante","Establecimiento");
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("bar","bar","Establecimiento");
+
+INSERT INTO `usuario`( `login`, `password`, `tipo`) VALUES 
+("meson","meson","Establecimiento");
+
+
+INSERT INTO `pincho`(`nombrePincho`, `descripcion`, `precio`, `celiaco`, `estado`, `imagen`) VALUES
+ ("pinchoRestaurante","pincho rico",2,"si", 0,"img/10.jpg");
+
+
+INSERT INTO `pincho`(`nombrePincho`, `descripcion`, `precio`, `celiaco`, `estado`, `imagen`) VALUES
+ ("pinchoRestaurante","pincho rico",2,"no", 0 ,"img/10.jpg");
+
+
+
+INSERT INTO `establecimiento`( `login`, `password`, `cif`, `nombreEstablecimiento`, `direccion`, `horario`, `paginaWeb`, `telefono`, `Pincho_idPincho`, `tipo`) 
+VALUES ("restaurante","restaurante","1111111111","restaurante","aki","10.00-20:00","restaurante.com",988271111,1,"Establecimiento");
+
+INSERT INTO `establecimiento`( `login`, `password`, `cif`, `nombreEstablecimiento`, `direccion`, `horario`, `paginaWeb`, `telefono`, `Pincho_idPincho`, `tipo`) 
+VALUES ("bar","bar","1111111111","bar","alla","10.00-20:00","bar.com",988272222,1,"Establecimiento");
+
+INSERT INTO `establecimiento`( `login`, `password`, `cif`, `nombreEstablecimiento`, `direccion`, `horario`, `paginaWeb`, `telefono`, `Pincho_idPincho`, `tipo`) 
+VALUES ("meson","meson","1111111111","meson","por alla","10.00-20:00","meson.com",988273333,1,"Establecimiento");
+
+
+
+

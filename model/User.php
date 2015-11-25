@@ -15,10 +15,6 @@ class User {
   
   private $login;
 
-  /**
-   * The password of the user
-   * @var string
-   */
   private $passwd;
   private $mail;
   private $name;
@@ -75,10 +71,7 @@ class User {
   } 
 
   public function getIdJuradoPopular() {
-    //return $this->idJuradoPopular;
-    //$this->idJuradoPopular = $this->idJuradoPopular +1;
-    //return $this->idJuradoPopular;
-    return 2;
+    return $this->idJuradoPopular;
   
   } 
 
@@ -88,25 +81,11 @@ class User {
   /**
    * Sets the username of this user
    * 
-   * @param string $username The username of this user
-   * @return void
    */  
   public function setLogin($login) {
     $this->login = $login;
   }
   
-  /**
-   * Gets the password of this user
-   * 
-   * @return string The password of this user
-   */  
-   
-  /**
-   * Sets the password of this user
-   * 
-   * @param string $passwd The password of this user
-   * @return void
-   */    
   public function setPasswd($passwd) {
     $this->passwd = $passwd;
   }

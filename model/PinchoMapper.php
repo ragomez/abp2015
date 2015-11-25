@@ -11,9 +11,7 @@ require_once(__DIR__."/../model/Pincho.php");
  *
  * Database interface for Post entities
  * 
- *Tareas :
- *Tareas realizadas:
- * - Correcion "pinchos" en llamadas a sentencias SQL.
+ * @author lipido <lipido@gmail.com>
  */
 class PinchoMapper {
 
@@ -31,16 +29,32 @@ class PinchoMapper {
    * @throws PDOException if a database error occurs
    * @return lista de TODOS los pinchos del sistema ordenador por establecimiento
    */  
-  public function findAll() {   
-    $stmt = $this->db->query("SELECT * FROM pincho ");    
+  public function pinchosValidados() {   
+    $stmt = $this->db->query("SELECT * FROM pincho where estado = 1 ");    
     $pincho_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
     $listaPinchos = array();
     
     foreach ($pincho_array as $pincho) {
-     
      // $establecimiento = new Establecimiento($pincho["idEstablecimiento"]);
-     
+      array_push($listaPinchos, new Pincho($pincho["idPincho"],$pincho["nombrePincho"],
+        $pincho["descripcion"], $pincho["precio"], $pincho["celiaco"], $pincho["estado"], 
+        $pincho["ganadorPopular"], $pincho["ganadorProfesional"], $pincho["puntosPopular"],
+        $pincho["mediaPuntosProfesional"], $pincho["imagen"]));
+    }   
+
+    return $listaPinchos;
+  }
+
+
+  public function pinchosNoValidados() {   
+    $stmt = $this->db->query("SELECT * FROM pincho where estado = 0 ");    
+    $pincho_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   
+    $listaPinchos = array();
+    
+    foreach ($pincho_array as $pincho) {
+     // $establecimiento = new Establecimiento($pincho["idEstablecimiento"]);
       array_push($listaPinchos, new Pincho($pincho["idPincho"],$pincho["nombrePincho"],
         $pincho["descripcion"], $pincho["precio"], $pincho["celiaco"], $pincho["estado"], 
         $pincho["ganadorPopular"], $pincho["ganadorProfesional"], $pincho["puntosPopular"],
@@ -56,8 +70,8 @@ class PinchoMapper {
    * Note: Comments are not added to the Post
    *
    * @throws PDOException if a database error occurs
-   * @return - Post The Post instances (without comments).  
-   *         - NULL if the Post is not found
+   * @return Post The Post instances (without comments). NULL 
+   * if the Post is not found
    */    
   public function findById($idPincho){
     $stmt = $this->db->prepare("SELECT * FROM pincho WHERE idPincho=?");
@@ -65,18 +79,18 @@ class PinchoMapper {
     $pincho = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if(!sizeof($pincho) == 0) {
-      return new Pincho(
-	$pincho["idPincho"],
-  $pincho["nombrePincho"],
-	$pincho["descripcion"],
-	$pincho["precio"],
-  $pincho["celiaco"], 
-  $pincho["estado"],
-  $pincho["ganadorPopular"], 
-  $pincho["ganadorProfesional"], 
-  $pincho["puntosPopular"],
-  $pincho["mediaPuntosProfesional"],
-  $pincho["imagen"]);
+        return new pincho(
+        	$pincho["idPincho"],
+          $pincho["nombrePincho"],
+        	$pincho["descripcion"],
+        	$pincho["precio"],
+          $pincho["celiaco"], 
+          $pincho["estado"],
+          $pincho["ganadorPopular"], 
+          $pincho["ganadorProfesional"], 
+          $pincho["puntosPopular"],
+          $pincho["mediaPuntosProfesional"],
+          $pincho["imagen"]);
     } else {
       return NULL;
     }   
@@ -106,6 +120,11 @@ class PinchoMapper {
     $stmt->execute(array($pincho->getNombrePincho(), $pincho->getDescripcionPincho(), $pincho->getPrecio(), $pincho->getCeliaco(), $pincho->getImagen())); 
   }
 
+  public function validaPincho($id) {///funcion admin apra validar pincho
+    $stmt = $this->db->prepare("UPDATE pincho set estado=1 where idPincho=?");
+    $stmt->execute(array($id)); 
+  }
+
   /**
    * Deletes a Post into the database
    * 
@@ -119,6 +138,24 @@ class PinchoMapper {
   }
 
 
+  public function votar($idPincho) {
+    $stmt = $this->db->prepare("UPDATE pincho set  puntosPopular=(puntosPopular+1) where idPincho=?");
+    $stmt->execute(array($idPincho)); 
 
-  
+
+
+    $stmt = $this->db->prepare("UPDATE codigo set codigoEstado=1 where Pincho_idPincho=?");
+      $stmt->execute(array($idPincho));
+
+  }
+
+   
 }
+/* public function actualizacion($codigo)
+  {
+
+      $stmt = $this->db->prepare("UPDATE Codigo set usado=1 where codigoVotacion=?");
+      $stmt->execute(array($codigo));
+
+  }
+*/

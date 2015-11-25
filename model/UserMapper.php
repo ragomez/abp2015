@@ -8,10 +8,7 @@ require_once(__DIR__."/../core/PDOConnection.php");
  *
  * Database interface for User entities
  * 
- *Tareas :
- *  -Nada
- *Tareas realizadas:
- * - Correcion en llamadas a sentencias SQL (usuarios, juradoPopular, establecimiento)
+ * @author lipido <lipido@gmail.com>
  */
 class UserMapper {
 
@@ -34,25 +31,18 @@ class UserMapper {
    */      
   public function save($user) {
     if($user->getTipo() == "Jurado popular"){
-      $stmt = $this->db->prepare("INSERT INTO juradopopular values (?,?,?,?,?,?,?,?,?)");
-      $stmt->execute(array($user->getIdJuradoPopular(),$user->getlogin(),$user->getPasswd(),$user->getDni(),$user->getName(),
-        $user->getApellidos(),$user->getMail(),$user->getTelefono(),$user->getTipo()));    
+      $stmt = $this->db->prepare("INSERT INTO juradopopular(login, passwd, mail, name, apellidos, dni, telefono, tipo) values (?,?,?,?,?,?,?,?)");
+      $stmt->execute(array($user->getlogin(),$user->getPasswd(),$user->getMail(),$user->getName(),
+        $user->getApellidos(),$user->getDni(),$user->getTelefono(),$user->getTipo()));    
     }
-   if($user->getTipo() == "Jurado profesional"){
-      $stmt = $this->db->prepare("INSERT INTO juradoProfesional values (?,?,?,?,?,?,?,?,?)");
-      $stmt->execute(array($user->getIdJuradoProfesional(),$user->getlogin(),$user->getPasswd(),$user->getDni(),$user->getName(),
-        $user->getApellidos(),$user->getMail(),$user->getTelefono(),$user->getTipo()));    
-    }
-   
     // idEstablecimiento, cif,nombre,direccion,horario,paginaWeb,telefono,Pincho_idPincho, tipo
     if($user->getTipo() == "Establecimiento"){
-      $stmt = $this->db->prepare("INSERT INTO establecimiento values (?,?,?,?,?,?,?,?,?,?,?)");
-      $stmt->execute(array($user->getIdEstablecimiento(),$user->getlogin(),$user->getPasswd(),$user->getCif(),$user->getNombre(),
-        $user->getDireccion(),$user->getHorario(),$user->getPaginaWeb(),$user->getTelefono(),$user->getPincho_idPincho(),$user->getTipo()));  
+      $stmt = $this->db->prepare("INSERT INTO establecimiento(login,passwd,cif,nombre,direccion,horario,paginaWeb,telefono,Pincho_idPincho, tipo) values (?,?,?,?,?,?,?,?,?,?,?)");
+      $stmt->execute(array($user->getlogin(),$user->getPasswd(),$user->getCif(),$user->getNombre(),
+        $user->getDireccion(),$user->getHorario(),$user->getPaginaWeb(),$user->getTelefono(),1,$user->getTipo()));  
     }
 
-   
-    $usuarioGeneral = $this->db->prepare("INSERT INTO usuarios values (?,?,?)");
+    $usuarioGeneral = $this->db->prepare("INSERT INTO usuario values (?,?,?)");
     $usuarioGeneral->execute(array($user->getlogin(),$user->getPasswd(),$user->getTipo()));    
 
    
@@ -65,7 +55,7 @@ class UserMapper {
    * @return boolean true if the username exists, false otherwise
    */
   public function usernameExists($login) {
-    $stmt = $this->db->prepare("SELECT count(loginUsuario) FROM usuarios where loginUsuario=?");
+    $stmt = $this->db->prepare("SELECT count(login) FROM usuario where login=?");
     $stmt->execute(array($login));
     
     if ($stmt->fetchColumn() > 0) {   
@@ -81,12 +71,31 @@ class UserMapper {
    * @return boolean true the username/passwrod exists, false otherwise.
    */
   public function isValidUser($login, $passwd) {
-    $stmt = $this->db->prepare("SELECT count(loginUsuario) FROM usuarios where loginUsuario=? and passwordUsuario=?");
-    $stmt->execute(array($login, $passwd));
-  
-    if ($stmt->fetchColumn() > 0) {
-      return true;        
-    }
+    $stmt = $this->db->prepare("SELECT count(login) FROM usuario where login=? and password=?");
+    $stmt->execute(array($login, $passwd));  
+    $usur = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if(!sizeof($usur) == 0) {
+        return true;
+    } 
+
   }
-  
+
+
+
+  public function buscarPorLogin($login){
+    $stmt = $this->db->prepare("SELECT * FROM usuario WHERE login=?");
+    $stmt->execute(array($login));
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if(!sizeof($user) == 0) {
+      return new UsuarioGeneral(
+      $user["login"],      
+      $user["password"],
+      $user["tipo"]);
+    } else {
+      return NULL;
+    }
+}
+    
 }

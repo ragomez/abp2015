@@ -3,7 +3,7 @@
 
 class PDOConnection {
   private static $dbhost = "127.0.0.1";
-  private static $dbname = "pintxatordb";
+  private static $dbname = "abp";
   private static $dbuser = "root";
   private static $dbpass = "toor";
   private static $db_singleton = null;

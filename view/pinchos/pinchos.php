@@ -22,7 +22,6 @@ include ("includesCSS/includeCss.html");
 	include("view/users/menuSuperior.php");
 ?>
 
-
 <section class="gallery" id="gallery">
 		<div class="container">
 			<div class="heading text-center">
@@ -32,12 +31,8 @@ include ("includesCSS/includeCss.html");
 			</div>
 			
 			<div id="grid-gallery" class="grid-gallery">
-
-					<section class="grid-wrap">
-						
-						<ul  class="grid">
-			
-							
+					<section class="grid-wrap">						
+						<ul  class="grid">							
 							<li class="grid-sizer "></li><!-- for Masonry column width -->	
 							<?php foreach ($pinchos as $pincho) { ?>
 							<li class=" col-md-3">

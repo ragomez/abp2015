@@ -79,9 +79,8 @@ $this->imagen=$imagen;
     return $this->imagen;
   }
 
-/**
-Setters
- **/      
+// Setters
+       
   
   public function setNombrePincho($nombrePincho) {
     $this->nombrePincho=$nombrePincho;

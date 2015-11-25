@@ -67,8 +67,23 @@ class UsersController extends BaseController {
 
  public function index()
   { 
-    $this->view->redirect("Pincho", "view");
-    $this->view->render("pinchos", "pinchos"); 
+    
+    $tipo = $this->tipo->getTipo();
+
+    if ($tipo == "Jurado popular"){
+        $this->view->redirect("Pincho", "view");
+        $this->view->render("pinchos", "pinchos"); 
+    }
+    
+     if ($tipo == "Administrador"){      
+        $this->view->redirect("Admin", "view"); 
+     }
+
+     if ($tipo == "Establecimiento"){      
+        $this->view->redirect("Establecimiento", "index");
+       
+
+     }
   }
 
 
@@ -77,9 +92,13 @@ class UsersController extends BaseController {
 
   public function login() {
     if (isset($_POST["login"])){ // reaching via HTTP Post...
-      //process login form    
-      if ($this->userMapper->isValidUser($_POST["login"],$_POST["passwd"])) {
+      //process login form  
+      $usuarioLogueado = $this->userMapper->isValidUser($_POST["login"],$_POST["passwd"]);
+     
+      if ($usuarioLogueado) {
+
 	       $_SESSION["currentuser"]=$_POST["login"];
+        
         
          	// send user to the restricted area (HTTP 302 code)
         	$this->view->redirect("users", "index");
@@ -93,8 +112,8 @@ class UsersController extends BaseController {
     }      
     
     // render the view (/view/users/login.php)
-    $this->view->setLayout("index");
-    $this->view->render("users", "body");    
+  $this->view->setLayout("index");
+  $this->view->render("users", "body");    
   }
 
  /**
@@ -143,9 +162,7 @@ class UsersController extends BaseController {
       }else {
         if($_POST["tipo"] == "Establecimiento"){
           $user = new Establecimiento();
-          //$idEstablecimiento=NULL, $login=NULL,$passwd=NULL, $cif=NULL, $nombre=NULL, $direccion=NULL, $horario=NULL, 
-          // $paginaWeb=NULL,$telefono = NULL,$Pincho_idPincho = NULL,$tipo = NULL
-            $user->setIdEstablecimiento(11111111);
+            $user->setIdEstablecimiento(11111112);
             $user->setLogin($_POST["login"]);
             $user->setPasswd($_POST["passwd"]);
             $user->setCif($_POST["cif"]);
@@ -153,7 +170,8 @@ class UsersController extends BaseController {
             $user->setDireccion($_POST["direccion"]);  
             $user->setHorario($_POST["horario"]);    
             $user->setPaginaWeb($_POST["paginaWeb"]);
-            $user->setTelefono($_POST["telefono"]);                   
+            $user->setTelefono($_POST["telefono"]);        
+                 
             $user->settipo($_POST["tipo"]);
         }
       }
@@ -177,7 +195,7 @@ class UsersController extends BaseController {
       	  // perform the redirection. More or less: 
       	  // header("Location: index.php?controller=users&action=login")
       	  // die();
-      	  $this->view->redirect("users", "login");	  
+      	  $this->view->redirect("users", "index");	  
       	} else {
       	  $errors = array();
       	  $errors["login"] = "Username already exists";

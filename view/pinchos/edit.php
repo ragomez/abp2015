@@ -7,7 +7,7 @@
  $post = $view->getVariable("post");
  $errors = $view->getVariable("errors");
  
- $view->setVariable("title", "Edit Pincho");
+ $view->setVariable("title", "Edit Post");
  
 ?><h1><?= i18n("Modify post") ?></h1>
 <form action="index.php?controller=posts&amp;action=edit" method="POST">
