@@ -8,7 +8,6 @@ class Folleto {
 
   private $idFolleto;
   private $titulo;
-  private $name;
   private $descripcion;
   private $fechaInicio;
   private $fechaFin;
@@ -17,7 +16,7 @@ class Folleto {
    * Constructor
    */
 
-  public function __construct($idFolleto=NULL, $titulo=NULL,$name=NULL, $descripcion=NULL, $fechaInicio=NULL, $fechaFin=NULL) {
+  public function __construct($idFolleto=NULL, $titulo=NULL, $descripcion=NULL, $fechaInicio=NULL, $fechaFin=NULL) {
     $this->idFolleto = $idFolleto;
     $this->titulo = $titulo; 
     $this->descripcion = $descripcion;
