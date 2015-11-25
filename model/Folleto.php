@@ -42,6 +42,9 @@ class Folleto {
   public function getFechaFin() {
     return $this->fechaFin;
   } 
+  public function getAdministrador_idAdministrador() {
+    return $this->patrocinador_idPatrocinador;
+  }
 
 //SETTERS 
   public function setIdFolleto($idFolleto) {
@@ -60,6 +63,9 @@ class Folleto {
   }
   public function setFechaFin($fechaFin) {
     $this->fechaFin = $fechaFin;
+  }
+  public function setAdministrador_idAdministrador($administrador_idAdministrador) {
+    $this->administrador_idAdministrador = $administrador_idAdministrador;
   }
 
   public function checkIsValidForCreate() {
