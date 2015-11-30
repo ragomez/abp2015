@@ -15,8 +15,8 @@
     <?php foreach ($premios as $premio): ?>
 	    <tr>	    
 	      <td>
-		    <a href="index.php?controller=premio&amp;action=view&amp;idPremio=<?= $premio->getIdPremio() ?>">
-		    <?= $premio->getIdPremio() ?></a>
+		    <a href="index.php?controller=Premio&amp;action=view&amp;nombrePremio=<?= $premio->getNombrePremio() ?>">
+		    <?= $premio->getNombrePremio() ?></a>
 	      </td>
 	      <td>
 	    
@@ -41,7 +41,7 @@
 		  <?php 
 		  // 'Edit Button'
 		  ?>		  
-		  <a href="index.php?controller=premio&amp;action=edit&amp;id=<?= $premio->getIdPremio() ?>">Edit</a>
+		  <a href="index.php?controller=Premio&amp;action=edit&amp;id=<?= $premio->getNombrePremio() ?>">Editar</a>
 
 	      </td>
 	    </tr>    

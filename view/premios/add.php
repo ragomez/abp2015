@@ -27,11 +27,7 @@
 	     Importe Profesional: <input type="text" name="importeProfesional">
 	    <?= isset($errors["importeProfesional"])?$errors["importeProfesional"]:"" ?><br>
 
-<<<<<<< HEAD
-	     Fecha Premio: <input type="text" name="fechaPremio">
-=======
 	     Fecha Premio(aaaa-mm-dd): <input type="text" name="fechaPremio">
->>>>>>> 6300cbda84fe3ed24e7d88ae5ffaee530f709942
 	    <?= isset($errors["fechaPremio"])?$errors["fechaPremio"]:"" ?><br>
 
 	     Id Patrocinador: <input type="text" name="patrocinador_idPatrocinador">
@@ -41,8 +37,6 @@
       </form>
 </div>
 </div>
-<<<<<<< HEAD
 </section>
-=======
 </section>
->>>>>>> 6300cbda84fe3ed24e7d88ae5ffaee530f709942
+
