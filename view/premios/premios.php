@@ -18,6 +18,12 @@ include ("includesCSS/includeCss.html");
  include("view/users/menuSuperior.php");
 ?>
 
+<div style = "float:right">	
+<?php 
+ // 'ADD Button'
+ ?>
+ <a href="index.php?controller=Premio&amp;action=add">Añadir Premio</a>
+</div>
 
 <section class="gallery                                                                                                                                                                              " id="gallery">
 		<div class="container">
@@ -40,6 +46,19 @@ include ("includesCSS/includeCss.html");
 										<p>Importe Profesional  :<?= $premio->getImporteProfesional() ?> € </p>
 										<p>Fecha 				:<?= sprintf("%s ", $premio->getFechaPremio())?></p>
 										<p>Id Patrocinador 		:<?= $premio->getPatrocinador_idPatrocinador() ?></p>
+										<div style="float:left">
+										  <?php 
+		 									// 'Edit Button'
+										  ?>		  
+		  									<a href="index.php?controller=Premio&amp;action=edit&amp;nombrePremio=<?= $premio->getNombrePremio() ?>">Editar</a>
+		  								</div>	
+		  								<div style = "float:right">	
+										  <?php 
+										  // 'Supr Button'
+										  ?>
+										  <a href="index.php?controller=Premio&amp;action=delete&amp;nombrePremio=<?= $premio->getNombrePremio() ?>">Eliminar</a>
+										  </div>
+									
 									</figcaption>
 
 								</figure>
@@ -51,6 +70,7 @@ include ("includesCSS/includeCss.html");
 					
 					
 				</div><!-- // grid-gallery -->
+
 			</div>
 	</section>
 

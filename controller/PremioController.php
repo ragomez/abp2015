@@ -126,9 +126,9 @@ class PremioController extends BaseController {
   }
      
   public function delete() {  
-    if (!isset($_POST["nombrePremio"])) {
-      throw new Exception(" Nombre de premio es obligatorio");
-    }
+   // if (!isset($_POST["nombrePremio"])) {
+   //   throw new Exception(" Nombre de premio es obligatorio");
+   // }
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Editing premios requires login");
     }
@@ -142,7 +142,7 @@ class PremioController extends BaseController {
 
     $this->premioMapper->delete($premio);
     $this->view->setFlash("Premio \"".$premio ->getNombrePremio()."\" successfully deleted.");    
-    $this->view->redirect("premios", "view");
+    $this->view->redirect("premios", "index");
     
   }
    public function view(){  
@@ -152,5 +152,17 @@ class PremioController extends BaseController {
 
     $this->view->render("premios", "premios"); 
     
-  }  
+  } 
+
+    public function index() {
+  
+    // obtain the data from the database
+    $premios = $this->premioMapper->findAll();    
+    
+    // put the array containing Post object to the view
+    $this->view->setVariable("premios", $premios);    
+    
+    // render the view (/view/posts/index.php)
+    $this->view->render("premios", "index");
+  } 
 }

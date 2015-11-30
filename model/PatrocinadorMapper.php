@@ -74,5 +74,5 @@ class PatrocinadorMapper {
     $stmt = $this->db->prepare("DELETE from patrocinador WHERE nombrePremio=?");
     $stmt->execute(array($patrocinador->getNombrePatrocinador()));    
   }
-  
+
 }
