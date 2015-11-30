@@ -1,7 +1,7 @@
 <?php 
  //file: view/posts/index.php
-
- require_once(__DIR__."/../../core/ViewManager.php");
+	include ("includesCSS/includeCss.html");
+	require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  
  $premios = $view->getVariable("premio");
