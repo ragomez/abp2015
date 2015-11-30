@@ -53,14 +53,7 @@ class PremioMapper {
     return $listaPremios;
   }
   
-  /**
-   * Loads a Premio from the database given its id
-   * 
-   *
-   * @throws PDOException if a database error occurs
-   * @return - Premio The Premio instances (without comments).  
-   *         - NULL if the Premio is not found
-   */    
+    
   public function findByName($nombrePremio){
     $stmt = $this->db->prepare("SELECT * FROM premio WHERE nombrePremio=?");
     $stmt->execute(array($nombrePremio));

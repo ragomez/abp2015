@@ -90,7 +90,7 @@ class PremioController extends BaseController {
     }
 
     $premioNombre = $_REQUEST["nombrePremio"];
-    $premio = $this->premioMapper->findById($premioNombre);
+    $premio = $this->premioMapper->findByName($premioNombre);
 
     if ($premio == NULL) {
       throw new Exception("Ningun premio con el nombre \"".$premioNombre. "\"");
@@ -133,39 +133,20 @@ class PremioController extends BaseController {
       throw new Exception("Not in session. Editing premios requires login");
     }
     
-     // Get the Post object from the database
     $premioNombre = $_REQUEST["nombrePremio"];
     $premio = $this->premioMapper->findByName($premioNombre);
     
-    // Does the post exist?
     if ($premio == NULL) {
       throw new Exception("Ningun premio con el nombre \"".$premioNombre. "\"");
     }  
-    
-    // Check if the Post author is the currentUser (in Session)
-    /*if ($post->getAuthor() != $this->currentUser) {
-      throw new Exception("Post author is not the logged user");
-    }
-    */
-    
-    // Delete the Post object from the database
+
     $this->premioMapper->delete($premio);
-    
-    // POST-REDIRECT-GET
-    // Everything OK, we will redirect the user to the list of posts
-    // We want to see a message after redirection, so we establish
-    // a "flash" message (which is simply a Session variable) to be
-    // get in the view after redirection.
     $this->view->setFlash("Premio \"".$premio ->getNombrePremio()."\" successfully deleted.");    
-    
-    // perform the redirection. More or less: 
-    // header("Location: index.php?controller=posts&action=index")
-    // die();
-    $this->view->redirect("premios", "index");
+    $this->view->redirect("premios", "view");
     
   }
    public function view(){  
-    // find the Post object in the database
+    
     $premios=$this->premioMapper->findAll();    
     $this->view->setVariable("premios", $premios);
 

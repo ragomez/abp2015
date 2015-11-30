@@ -14,15 +14,15 @@
 
    
     <p> 
-    	Importe Popular 	  	:<?= $premio->getImportePopular() ?>
+    	Importe Popular 	  	:<?= $premio->getImportePopular() . "€"?>
        <BR>
       Importe Profesional 	:<?= $premio->getImporteProfesional() ?>
        <BR>
    	 	Fecha Premio    			:<?= $premio->getFechaPremio() ?>
        <BR>
-     <!-- Id Patrocinador    		:<?= $premio->getPatrocinador_idPatrocinador() ?>
+      Id Patrocinador    		:<?= $premio->getPatrocinador_idPatrocinador() ?>
        <BR>
-     --> 
+      
     </p>
 
 

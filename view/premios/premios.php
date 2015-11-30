@@ -36,8 +36,8 @@ include ("includesCSS/includeCss.html");
 								<figure>                           
 																
 									<figcaption><h3><?= $premio->getNombrePremio() ?> </h3>
-										<p>Importe Popular 		:<?= $premio->getImportePopular() ?> euros </p>
-										<p>Importe Profesional  :<?= $premio->getImporteProfesional() ?> euros </p>
+										<p>Importe Popular 		:<?= $premio->getImportePopular() ?> € </p>
+										<p>Importe Profesional  :<?= $premio->getImporteProfesional() ?> € </p>
 										<p>Fecha 				:<?= sprintf("%s ", $premio->getFechaPremio())?></p>
 										<p>Id Patrocinador 		:<?= $premio->getPatrocinador_idPatrocinador() ?></p>
 									</figcaption>
