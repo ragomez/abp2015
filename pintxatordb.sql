@@ -405,7 +405,7 @@ CREATE INDEX `fk_VotoPopular_2_idx` ON `abp`.`votopopular` (`idCodigo` ASC);
 SHOW WARNINGS;
 
 
-
+grant all privileges on abp.* to abpuser@localhost identified by "abppass";
 
 
 INSERT INTO `administrador`(`login`, `password`, `mailAdmin`, `tipo`) VALUES 

@@ -79,7 +79,7 @@ class PinchoMapper {
     $pincho = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if(!sizeof($pincho) == 0) {
-        return new pincho(
+        return new Pincho(
         	$pincho["idPincho"],
           $pincho["nombrePincho"],
         	$pincho["descripcion"],
@@ -95,6 +95,7 @@ class PinchoMapper {
       return NULL;
     }   
   }
+
 
   /**
    * Saves a Post into the database
@@ -144,7 +145,7 @@ class PinchoMapper {
 
 
 
-    $stmt = $this->db->prepare("UPDATE codigo set codigoEstado=1 where Pincho_idPincho=?");
+    $stmt = $this->db->prepare("UPDATE c odigo set codigoEstado=1 where Pincho_idPincho=?");
       $stmt->execute(array($idPincho));
 
   }

@@ -20,8 +20,7 @@ include ("includesCSS/includeCss.html");
 
   <body>
     <!-- header -->
-    
-
+  
 <?php 
   include("view/users/menuSuperior.php");
 ?>

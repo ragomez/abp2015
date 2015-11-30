@@ -8,6 +8,8 @@ require_once(__DIR__."/../model/UserMapper.php");
 
 require_once(__DIR__."/../controller/BaseController.php");
 
+require_once(__DIR__."/../model/Pincho.php");
+require_once(__DIR__."/../model/PinchoMapper.php");
 /**
  * Class UsersController
  * 
@@ -32,8 +34,8 @@ class AdminController extends BaseController {
 
     // Users controller operates in a "welcome" layout
     // different to the "default" layout where the internal
-    // menu is displayed
-    $this->view->setLayout("default");     
+    // menu is displayed  
+    $this->view->setLayout("default");
   }
 
 

@@ -34,8 +34,12 @@ class PinchoController extends BaseController {
     parent::__construct();
     
     $this->pinchoMapper = new PinchoMapper; 
-    $this->codigoMapper = new CodigoMapper;           
-  }
+    $this->codigoMapper = new CodigoMapper;         
+
+    $tipo=$this->tipo->getTipo();
+
+   }
+  
   
   /**
    * Action to list posts
@@ -48,16 +52,24 @@ class PinchoController extends BaseController {
    * <li>posts/index (via include)</li>   
    * </ul>
    */
-  public function index() {
-  
-    // obtain the data from the database
-    $pincho = $this->pinchoMapper->findAll();    
+
+  public function index(){  //esta funcion se diferencia con al abajo en que una muestra una cabezara de imagen y otro no
+    //se podria mejorar para siplicar pero weno...
+    //POR QUE TENEMOS DOS VISTAS DE LOS MISMO?¿?¿? ESTO SOBRA
+ 
     
-    // put the array containing Pincho object to the view
-    $this->view->setVariable("pincho", $pincho);    
+    // find the Post object in the database
+    $pinchos=$this->pinchoMapper->findAll();    
+    // put the Post object to the view
+    $this->view->setVariable("pincho", $pincho);
     
-    // render the view (/view/pincho/index.php)
-    $this->view->render("pincho", "index");
+    // check if comment is already on the view (for example as flash variable)
+    // if not, put an empty Comment for the view
+
+    
+    // render the view (/view/posts/view.php)
+    $this->view->render("pincho", "index"); 
+    
   }
   
   
@@ -147,6 +159,7 @@ class PinchoController extends BaseController {
     // check if comment is already on the view (for example as flash variable)
     // if not, put an empty Comment for the view    
     // render the view (/view/posts/view.php)
+    
     $this->view->render("pinchos", "listarTodosPinchos");
     
   }
@@ -159,6 +172,7 @@ class PinchoController extends BaseController {
     $pinchos=$this->pinchoMapper->pinchosNoValidados();    
     // put the Post object to the view
     $this->view->setVariable("pinchos", $pinchos);
+   
     
     // check if comment is already on the view (for example as flash variable)
     // if not, put an empty Comment for the view    

@@ -1,9 +1,10 @@
 <?php
  //file: view/layouts/default.php
-
+include ("includesCSS/includeCss.html");
  require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  $user = $view->getVariable("currentusername");
+ $tipo = $view->getVariable("tipo");
  $errors = $view->getVariable("errors");
 
 ?><!DOCTYPE html>
@@ -31,16 +32,46 @@
               <div class="navArea">
                 <div class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
-                    <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosValidados">Listar todos los pinchos</a></li>
-                    <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=votarFormularioPopular">Votar</a></li>
-                    <li class="menuItem"><a href="#gallery">Configuracion de cuenta</a></li>                    
+                      
                     <?= isset($errors["general"])?$errors["general"]:"" ?>      
-                    <?php if (isset($user)){ ?>            
-                     
-                      <li><a href="#"><?= sprintf("%s ", $user) ?></a></li>
-                      <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>
-                  
-                    <?php } ?>
+                    <?php if (isset($user)){  
+
+                              //vista usuario normal (jurado Popular)
+
+                        if ($tipo->getTipo() == "Jurado popular"){ ?>  
+                          <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosValidados">Ver todos los pinchos</a></li>
+                          <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=votarFormularioPopular">Votar</a></li>
+                          <li class="menuItem"><a href="index.php?controller=users&amp;action=mostrarJuradoPop"><?= $user?></a></li>    
+                          <li class="menuItem"><a href="index.php?controller=Establecimiento&amp;action=listarEstablecimientos">Listar Establecimientos</a></li>    
+                          <li class="menuItem"><a href="#gallery">Gastromapa</a></li>
+                          <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>
+                        <?php } 
+
+                              //vista establecimiento
+
+                        if ($tipo->getTipo() == "Establecimiento"){ ?>  
+                         <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosValidados">Ver todos los pinchos</a></li>
+                          <li class="menuItem"><a href="index.php?controller=Establecimiento&amp;action=vistaGenerarCodigo">Generar codigos</a></li>
+                          <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=add">Añadir un Pincho</a></li>
+                          <li class="menuItem"><a href="#gallery">Mi Pincho</a></li> 
+                          <li class="menuItem"><a href="index.php?controller=Establecimiento&amp;action=mostrar"><?= $user?></a></li>    
+                          <li class="menuItem"><a href="index.php?controller=Premio&amp;action=listar">Premios</a></li> 
+                          <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>
+                        <?php } 
+
+                              //vista administrador
+
+                        if ($tipo->getTipo() == "Administrador"){ ?>  
+                          <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosNoValidados">Validar pinchos de establecimientos</a></li>
+                          <li class="menuItem"><a href="">Ver Folletos</a></li>
+                           <li class="menuItem"><a href="index.php?controller=Folleto&amp;action=viewAddFolleto">add folleto</a></li>                  
+                      <?= isset($errors["general"])?$errors["general"]:"" ?>      
+                          <li class="menuItem"><a href="index.php?controller=Premio&amp;action=listar">Premios</a></li> 
+                          <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>
+                        <?php } 
+                       } ?>
+
+
                                 
                   </ul>
                 </div>
@@ -48,8 +79,7 @@
             </div>
           </div>
         </div>
-      </div>
-
+    
 
 
     </nav>

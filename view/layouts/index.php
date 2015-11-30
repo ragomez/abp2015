@@ -43,13 +43,14 @@ include ("includesCSS/includeCss.html");
             </div>
             <button type="submit" class="btn btn-success">Entrar</button>
             <a href ="index.php?controller=users&amp;action=register" type="submit" class="btn btn-success">Registrar</a>
+
           </form>
 
           <?php } ?>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
-
+   
 
     <main>
       <div id="flash">

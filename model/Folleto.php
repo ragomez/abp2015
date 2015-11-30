@@ -6,30 +6,30 @@ require_once(__DIR__."/../core/ValidationException.php");
 
 class Folleto {
 
-  private $idFolleto;
+ 
   private $titulo;
   private $descripcion;
   private $fechaInicio;
   private $fechaFin;
+  private $administrador_idAdministrador;
+
 
   /*
    * Constructor
    */
 
-  public function __construct($idFolleto=NULL, $titulo=NULL, $descripcion=NULL, $fechaInicio=NULL, $fechaFin=NULL) {
-    $this->idFolleto = $idFolleto;
+  public function __construct($titulo=NULL, $descripcion=NULL, $fechaInicio=NULL, $fechaFin=NULL,$administrador_idAdministrador=NULL) {
     $this->titulo = $titulo; 
     $this->descripcion = $descripcion;
     $this->fechaInicio = $fechaInicio;
     $this->fechaFin = $fechaFin;
+    $this->administrador_idAdministrador = $administrador_idAdministrador;
 
   }
 
 
 //GETTERS
-  public function getIdFolleto() {
-    return 2;
-  }
+
   public function getTitulo() {
     return $this->titulo;
   } 
@@ -43,19 +43,17 @@ class Folleto {
     return $this->fechaFin;
   } 
   public function getAdministrador_idAdministrador() {
-    return $this->patrocinador_idPatrocinador;
+    return $this->administrador_idAdministrador;
   }
 
 //SETTERS 
-  public function setIdFolleto($idFolleto) {
-    $this->idFolleto = $idFolleto;
-  }
+
 
   public function setTitulo($titulo) {
     $this->titulo = $titulo;
   }
   
-  public function setDecripcion($descripcion) {
+  public function setDescripcion($descripcion) {
     $this->descripcion = $descripcion;
   }
   public function setFechaInicio($fechaInicio) {

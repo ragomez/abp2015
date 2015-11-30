@@ -4,8 +4,8 @@
 
 require_once(__DIR__."/../model/Premio.php");
 require_once(__DIR__."/../model/PremioMapper.php");
-require_once(__DIR__."/../model/Patrocinador.php");
-
+//require_once(__DIR__."/../model/Patrocinador.php");
+// Comentado ata definir patrocinador
 require_once(__DIR__."/../core/ViewManager.php");
 require_once(__DIR__."/../controller/BaseController.php");
 
@@ -29,7 +29,7 @@ class PremioController extends BaseController {
   public function __construct() { 
     parent::__construct();
     
-    $this->premioMapper = new PremioMapper();          
+    $this->premioMapper = new PremioMapper;          
   }
   
 
@@ -58,54 +58,17 @@ class PremioController extends BaseController {
    ******************* vista de un pincho ************ 
    * 
    */
-  public function view(){
+  public function listar(){  // Fuka
     
- 
-    
-    // find the Premio object in the database
     $premios=$this->premioMapper->findAll();
-    
-    // put the Premio object to the view
     $this->view->setVariable("premios", $premios);
-    
-    // check if comment is already on the view (for example as flash variable)
-    // if not, put an empty Comment for the view
-
-    
-    // render the view (/view/posts/view.php)
-    $this->view->render("premios", "view");
+    $this->view->render("premios", "premios");
     
   }
   
-  /**
-   * Action to add a new post
-   * 
-   * When called via GET, it shows the add form
-   * When called via POST, it adds the post to the
-   * database
-   * 
-   * The expected HTTP parameters are:
-   * <ul>
-   * <li>title: Title of the post (via HTTP POST)</li>
-   * <li>content: Content of the post (via HTTP POST)</li>      
-   * </ul>
-   * 
-   * The views are:
-   * <ul>
-   * <li>posts/add: If this action is reached via HTTP GET (via include)</li>   
-   * <li>posts/index: If post was successfully added (via redirect)</li>
-   * <li>posts/add: If validation fails (via include). Includes these view variables:</li>
-   * <ul>
-   *  <li>post: The current Post instance, empty or 
-   *  being added (but not validated)</li>
-   *  <li>errors: Array including per-field validation errors</li>   
-   * </ul>
-   * </ul>
-   * @throws Exception if no user is in session
-   * @return void
-   */
-  
-  public function add() {
+
+  public function add() { //fuka
+   
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Adding premio requires login");
     }
@@ -114,16 +77,12 @@ class PremioController extends BaseController {
     
     if (isset($_POST["submit"])) { // reaching via HTTP Post...
       
-      // populate the Premio object with data form the form
-
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
-      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"])
+      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
       $premio->setNombrePremio($_POST["nombrePremio"]);
-  
-      
-      // The user of the Premio is the currentUser (user in session)
+
        
       try {
   // validate Post object
@@ -141,8 +100,8 @@ class PremioController extends BaseController {
   
   // perform the redirection. More or less: 
   // header("Location: index.php?controller=posts&action=index")
-  // die();
-  $this->view->redirect("Premio", "view");
+  // die();                                                                                   
+  $this->view->redirect("Premio", "listar");                                         
   
       }catch(ValidationException $ex) {      
   // Get the errors array inside the exepction...
@@ -155,7 +114,7 @@ class PremioController extends BaseController {
     // Put the Premio object visible to the view
     $this->view->setVariable("premio", $premio);    
     
-    // render the view (/view/premio/add.php)
+    // render the view (/view/premios/add.php)
     $this->view->render("premios", "add");
     
   }
@@ -223,7 +182,7 @@ class PremioController extends BaseController {
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
-      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"])
+      $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
       $premio->setNombrePremio($_POST["nombrePremio"]);
       
       try {
@@ -232,19 +191,16 @@ class PremioController extends BaseController {
 	
 	// update the Post object in the database
 	       $this->premioMapper->update($premio);
-	
 	// POST-REDIRECT-GET
 	// Everything OK, we will redirect the user to the list of posts
 	// We want to see a message after redirection, so we establish
 	// a "flash" message (which is simply a Session variable) to be
 	// get in the view after redirection.
 	       $this->view->setFlash(sprintf(i18n("Premio \"%s\" successfully updated."),$premio ->getNombrePremio()));
-	
 	// perform the redirection. More or less: 
 	// header("Location: index.php?controller=posts&action=index")
 	// die();
-	       $this->view->redirect("premios", "index");	
-	
+	       $this->view->redirect("premios", "index");		
       }
       catch(ValidationException $ex) {
 	// Get the errors array inside the exepction...
@@ -252,6 +208,7 @@ class PremioController extends BaseController {
 	// And put it to the view as "errors" variable
 	       $this->view->setVariable("errors", $errors);
       }
+
     }
     
     // Put the Post object visible to the view

@@ -58,7 +58,9 @@ class BaseController {
       //add current user to the view, since some views require it
       $usermapper = new UserMapper;
       $this->tipo = $usermapper->buscarPorLogin($_SESSION["currentuser"]);
-      
+     /* print_r($this->tipo);
+      die();*/
+      $this->view->setVariable("tipo", $this->tipo);
       $this->view->setVariable("currentusername", $this->currentUser->getLogin());
       
     }    

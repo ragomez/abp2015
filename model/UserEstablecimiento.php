@@ -4,7 +4,7 @@
 require_once(__DIR__."/../core/ValidationException.php");
 
 class Establecimiento {
-  //  idEstablecimiento, cif,nombre,direccion,horario,paginaWeb,telefono,Pincho_idPincho, tipo
+  //  idEstablecimiento, login, passwd, cif,nombre,direccion,horario,paginaWeb,telefono,Pincho_idPincho, tipo
   private $login;	
   private $passwd;		
   private $idEstablecimiento;
@@ -23,8 +23,7 @@ class Establecimiento {
    * @param string $username The name of the user
    * @param string $passwd The password of the user
    */
-  public function __construct($idEstablecimiento=NULL, $login=NULL,$passwd=NULL, $cif=NULL, $nombre=NULL, $direccion=NULL, $horario=NULL,  $paginaWeb=NULL,$telefono = NULL,$Pincho_idPincho = NULL,$tipo = NULL) {
-    $this->idEstablecimiento = $idEstablecimiento; 
+  public function __construct($idEstablecimiento=NULL,$login=NULL,$passwd=NULL, $cif=NULL, $nombre=NULL, $direccion=NULL, $horario=NULL,  $paginaWeb=NULL,$telefono = NULL,$Pincho_idPincho = NULL,$tipo = NULL) {
     $this->login = $login;
     $this->passwd = $passwd; 
     $this->cif = $cif;
@@ -35,6 +34,7 @@ class Establecimiento {
     $this->telefono = $telefono;
     $this->Pincho_idPincho = $Pincho_idPincho;      
     $this->tipo = $tipo;
+    $this->idEstablecimiento = $idEstablecimiento;
   }
 
   //gets
@@ -149,4 +149,26 @@ class Establecimiento {
 	throw new ValidationException($errors, "user is not valid");
       }
   } 
+
+     // COMPRUEBA ACTUALIZA ESTABLECIMIENTO
+
+  public function checkIsValidForUpdate() {
+    $errors = array();
+    
+    if (!isset($this->login)) {      
+      $errors["login"] = "id is mandatory";
+    }
+    
+    try{
+      $this->checkIsValidForCreate();
+    }catch(ValidationException $ex) {
+      foreach ($ex->getErrors() as $key=>$error) {
+  $errors[$key] = $error;
+      }
+    }    
+    if (sizeof($errors) > 0) {
+      throw new ValidationException($errors, "establecimiento is not valid");
+    }
+  }
+  
 }

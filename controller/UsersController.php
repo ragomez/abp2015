@@ -71,17 +71,19 @@ class UsersController extends BaseController {
     $tipo = $this->tipo->getTipo();
 
     if ($tipo == "Jurado popular"){
-        $this->view->redirect("Pincho", "view");
-        $this->view->render("pinchos", "pinchos"); 
+
+        $this->view->redirect("Pincho", "view");   
+        
     }
     
-     if ($tipo == "Administrador"){      
+    if ($tipo == "Administrador"){     
         $this->view->redirect("Admin", "view"); 
+
      }
 
-     if ($tipo == "Establecimiento"){      
-        $this->view->redirect("Establecimiento", "index");
-       
+    if ($tipo == "Establecimiento"){  
+
+        $this->view->redirect("Establecimiento", "index");      
 
      }
   }
@@ -150,7 +152,6 @@ class UsersController extends BaseController {
     if (isset($_POST["login"])){ // reaching via HTTP Post...
       $user = new User();
       if ($_POST["tipo"] == "Jurado popular"){
-        $user->setIdJuradoPopular($_POST["idJuradoPopular"]);
         $user->setLogin($_POST["login"]);
         $user->setPasswd($_POST["passwd"]);
         $user->setDni($_POST["dni"]);
@@ -162,7 +163,6 @@ class UsersController extends BaseController {
       }else {
         if($_POST["tipo"] == "Establecimiento"){
           $user = new Establecimiento();
-            $user->setIdEstablecimiento(11111112);
             $user->setLogin($_POST["login"]);
             $user->setPasswd($_POST["passwd"]);
             $user->setCif($_POST["cif"]);
@@ -195,7 +195,8 @@ class UsersController extends BaseController {
       	  // perform the redirection. More or less: 
       	  // header("Location: index.php?controller=users&action=login")
       	  // die();
-      	  $this->view->redirect("users", "index");	  
+
+      	  $this->view->redirect("users", "login");	  
       	} else {
       	  $errors = array();
       	  $errors["login"] = "Username already exists";
@@ -240,6 +241,17 @@ class UsersController extends BaseController {
     // die();
     $this->view->redirect("users", "login");
    
+  }
+
+  public function mostrarJuradoPop(){
+     if (!isset($this->currentUser)) {
+      throw new Exception("user is mandatory");
+    }
+    $login=$this->currentUser->getLogin();
+    $jurado=$this->userMapper->buscarJuradoPopular($login);
+
+    $this->view->setVariable("jurado",$jurado);
+    $this->view->render("users","perfilJuradoPop");
   }
   
 }
