@@ -81,9 +81,7 @@ class PremioController extends BaseController {
   }
     
   public function edit() {
-    if (!isset($_REQUEST["nombrePremio"])) {
-      throw new Exception("Es necesario un Nombre de premio");
-    }
+    
     
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Editar premio requiere loguearse");
@@ -110,7 +108,7 @@ class PremioController extends BaseController {
 	
 	       $this->view->setFlash(sprintf(i18n("Premio \"%s\" successfully updated."),$premio ->getNombrePremio()));
 
-	       $this->view->redirect("premios", "index");		
+	       $this->view->redirect("premio", "listar");		
       }
       catch(ValidationException $ex) {
 
@@ -149,6 +147,6 @@ class PremioController extends BaseController {
     $this->view->setVariable("premios", $premios);    
     
     // render the view (/view/posts/index.php)
-    $this->view->render("premios", "index");
+    $this->view->render("premios", "listar");
   } 
 }

@@ -68,9 +68,6 @@ class PatrocinadorController extends BaseController {
   }
     
   public function edit() {
-    if (!isset($_REQUEST["nombrePatrocinador"])) {
-      throw new Exception("Es necesario un Nombre de patrocinador");
-    }
     
     if (!isset($this->currentUser)) {
       throw new Exception("Editar Patrocinador requiere iniciar sesion");
@@ -93,8 +90,7 @@ class PatrocinadorController extends BaseController {
 	       $this->patrocinadorMapper->update($patrocinador);
 	
 	       $this->view->setFlash(sprintf(i18n("Patrocinador \"%s\" actualizado correctamente."),$patrocinador ->getNombrePatrocinador()));
-
-	       $this->view->redirect("patrocinadores", "patrocinadores");		
+	       $this->view->redirect("patrocinador", "listar");		
       }
       catch(ValidationException $ex) {
 

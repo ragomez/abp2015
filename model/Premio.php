@@ -112,9 +112,7 @@ class Premio{
   public function checkIsValidForUpdate() {
     $errors = array();
     
-    if (!isset($this->id)) {      
-      $errors["nombrePremio"] = "El nombre es obligatorio";
-    }
+    
     
     try{
       $this->checkIsValidForCreate();

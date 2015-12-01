@@ -55,23 +55,23 @@ class PatrocinadorMapper {
   }
 
   public function save(Patrocinador $patrocinador) {
-    $stmt = $this->db->prepare("INSERT INTO patrocinador(nombrePatrocinador,importe,
+    $stmt = $this->db->prepare("INSERT INTO patrocinador(idPatrocinador,nombrePatrocinador,importe,
                                             telefonoPatrocinador)
-                              values (?,?,?)");
-    $stmt->execute(array($patrocinador->getNombrePatrocinador(),
+                              values (?,?,?,?)");
+    $stmt->execute(array($patrocinador->getIdPatrocinador(),$patrocinador->getNombrePatrocinador(),
                         $patrocinador->getImporte(), $patrocinador->gettelefonoPatrocinador()));    
   }
     
-  public function update(Premio $patrocinador) {
+  public function update(Patrocinador $patrocinador) {
     $stmt = $this->db->prepare("UPDATE patrocinador set  nombrePatrocinador=? ,
-                              importe=?, telefonoPatrocinador=?");
+                              importe=?, telefonoPatrocinador=? where idPatrocinador=?");
 
-   $stmt->execute(array($patrocinador->getNombrePatrocinador(),
+   $stmt->execute(array($patrocinador->getIdPatrocinador(), $patrocinador->getNombrePatrocinador(),
                         $patrocinador->getImporte(), $patrocinador->gettelefonoPatrocinador()));
   }
   
-  public function delete(Premio $premio) {
-    $stmt = $this->db->prepare("DELETE from patrocinador WHERE nombrePremio=?");
+  public function delete(Patrocinador $patrocinador) {
+    $stmt = $this->db->prepare("DELETE from patrocinador WHERE nombrePatrocinador=?");
     $stmt->execute(array($patrocinador->getNombrePatrocinador()));    
   }
 

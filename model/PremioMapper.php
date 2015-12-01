@@ -3,7 +3,7 @@
 require_once(__DIR__."/../core/PDOConnection.php");
 
 require_once(__DIR__."/../model/Premio.php");
-// require_once(__DIR__."/../model/Patrocinador.php");
+require_once(__DIR__."/../model/Patrocinador.php");
 // Cando exista o modelo Patrocinador se pode descomentar
 
 /**
@@ -83,11 +83,11 @@ class PremioMapper {
    * @return void
    */    
   public function save(Premio $premio) {
-    $stmt = $this->db->prepare("INSERT INTO premio(importePopular,
+    $stmt = $this->db->prepare("INSERT INTO premio(idPremio,importePopular,
                               importeProfesional, fechaPremio,patrocinador_idPatrocinador,
                               nombrePremio)
-                              values (?,?,?,?,?)");
-    $stmt->execute(array($premio->getImportePopular(),
+                              values (?,?,?,?,?,?)");
+    $stmt->execute(array($premio->getIdPremio(),$premio->getImportePopular(),
                         $premio->getImporteProfesional(), $premio->getFechaPremio(),
                         $premio->getPatrocinador_idPatrocinador(), $premio->getNombrePremio()));    
   }
@@ -102,7 +102,8 @@ class PremioMapper {
   public function update(Premio $premio) {
     $stmt = $this->db->prepare("UPDATE premio set  importePopular=? ,
                               importeProfesional=?, fechaPremio=?,
-                              patrocinador_idPatrocinador =? where nombrePremio=?");
+                              patrocinador_idPatrocinador =?  
+                              ,nombrePremio=? where idPremio=?");
 
     $stmt->execute(array($premio->getImportePopular(),$premio->getImporteProfesional(),
                         $premio->getFechaPremio(),$premio->getPatrocinador_idPatrocinador(),

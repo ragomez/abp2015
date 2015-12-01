@@ -75,9 +75,6 @@ class Patrocinador {
   public function checkIsValidForUpdate() {
     $errors = array();
     
-    if (!isset($this->id)) {      
-      $errors["idPatrocinador"] = "id is mandatory";
-    }
     
     try{
       $this->checkIsValidForCreate();

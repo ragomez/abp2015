@@ -16,6 +16,8 @@
             <h1><?= i18n("Modificar patrocinador") ?></h1>
             <form action="index.php?controller=Patrocinador&amp;action=edit" method="POST">
       
+
+      
                   <?= i18n("Nombre Patrocinador") ?>: <input type="text" name="nombrePatrocinador" 
                   value="<?= isset($_POST["nombrePatrocinador"])?$_POST["nombrePatrocinador"]:$patrocinador->getNombrePatrocinador() ?>">
                   <?= isset($errors["nombrePatrocinador"])?$errors["nombrePatrocinador"]:"" ?><br>
@@ -25,11 +27,11 @@
                   <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
 
                   <?= i18n("Numero de Telefono") ?>: <input type="text" name="telefonoPatrocinador"  
-                  value="<?= isset($_POST["telefonoParocinador"])?$_POST["telefonoPatrocinador"]:$patrocinador->getTelefonoPatrocinador() ?>">
+                  value="<?= isset($_POST["telefonoPatrocinador"])?$_POST["telefonoPatrocinador"]:$patrocinador->getTelefonoPatrocinador() ?>">
                   <?= isset($errors["telefonoPatrocinador"])?$errors["telefonoPatrocnador"]:"" ?><br>
                       
       
-                  <input type="hidden" name="id" value="<?= $patrocinador->getNombrePatrocinador() ?>">
+                  <input type="hidden" name="id" value="<?= $patrocinador->getIdPatrocinador() ?>">
                   <input type="submit" name="submit" value="<?= i18n("Modificar patrocinador") ?>">
             </form>
  </div>   
