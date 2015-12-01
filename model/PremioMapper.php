@@ -108,17 +108,10 @@ class PremioMapper {
                         $premio->getFechaPremio(),$premio->getPatrocinador_idPatrocinador(),
                         $premio->getNombrePremio()));
   }
-
-  /**
-   * Deletes a Premio into the database
-   * 
-   * @param Premio $premio The premio to be deleted
-   * @throws PDOException if a database error occurs
-   * @return void
-   */   
+  
   public function delete(Premio $premio) {
-    $stmt = $this->db->prepare("DELETE from premio WHERE idPremio=?");
-    $stmt->execute(array($premio->getIdPremio()));    
+    $stmt = $this->db->prepare("DELETE from premio WHERE nombrePremio=?");
+    $stmt->execute(array($premio->getNombrePremio()));    
   }
   
 }

@@ -1,7 +1,7 @@
 <?php 
  //file: view/posts/view.php
  
- // include ("includesCSS/includeCss.html");
+ include ("includesCSS/includeCss.html");
  require_once(__DIR__."/../../core/ViewManager.php");
  
  $view = ViewManager::getInstance();
