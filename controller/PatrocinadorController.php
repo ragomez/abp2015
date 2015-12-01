@@ -85,7 +85,7 @@ class PatrocinadorController extends BaseController {
 
     if (isset($_POST["submit"])) { // reaching via HTTP Post...  
       $patrocinador->setImporte($_POST["importe"]);
-      $patrocinador>setTelefonoPatrocinador($_POST["telefonoPatrocinador"]);
+      $patrocinador->setTelefonoPatrocinador($_POST["telefonoPatrocinador"]);
       
       try {
 
@@ -94,7 +94,7 @@ class PatrocinadorController extends BaseController {
 	
 	       $this->view->setFlash(sprintf(i18n("Patrocinador \"%s\" actualizado correctamente."),$patrocinador ->getNombrePatrocinador()));
 
-	       $this->view->redirect("patrocinadores", "view");		
+	       $this->view->redirect("patrocinadores", "patrocinadores");		
       }
       catch(ValidationException $ex) {
 
@@ -127,7 +127,7 @@ class PatrocinadorController extends BaseController {
 
     $this->view->setFlash("Patrocinador \"".$patrocinador ->getNombrePatrocinador()."\" eliminado correctamente.");    
 
-    $this->view->redirect("patrocinadores", "view");
+    $this->view->redirect("patrocinadores", "patrocinadores");
     
   }
    public function view(){  

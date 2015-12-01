@@ -35,6 +35,22 @@ include ("includesCSS/includeCss.html");
                   <figcaption><h3><?= $patrocinador->getNombrePatrocinador() ?> </h3>
                     <p>Importe      :<?= $patrocinador->getImporte() ?> € </p>
                     <p>Telefono  :<?= $patrocinador->getTelefonoPatrocinador() ?> </p>
+
+                      <div style="float:left">
+                      <?php 
+                      // 'Edit Button'
+                      ?>      
+                      <a href="index.php?controller=Patrocinador&amp;action=edit&amp;nombrePatrocinador=<?= $patrocinador->getNombrePatrocinador() ?>">Editar</a>
+                      </div>  
+                    
+                      <div style = "float:right"> 
+                      <?php 
+                      // 'Supr Button'
+                      ?>
+                      <a href="index.php?controller=Patrocinador&amp;action=delete&amp;nombrePatrocinador=<?= $patrocinador->getNombrePatrocinador() ?>">Eliminar</a>
+                      </div>
+                      <br/> 
+
                   </figcaption>
 
                 </figure>

@@ -64,9 +64,10 @@ include ("includesCSS/includeCss.html");
                         if ($tipo->getTipo() == "Administrador"){ ?>  
                           <li class="menuItem"><a href="index.php?controller=Pincho&amp;action=listarTodosPinchosNoValidados">Validar pinchos de establecimientos</a></li>
                           <li class="menuItem"><a href="">Ver Folletos</a></li>
-                           <li class="menuItem"><a href="index.php?controller=Folleto&amp;action=viewAddFolleto">add folleto</a></li>                  
+                          <li class="menuItem"><a href="index.php?controller=Folleto&amp;action=viewAddFolleto">add folleto</a></li>                  
                       <?= isset($errors["general"])?$errors["general"]:"" ?>      
-                          <li class="menuItem"><a href="index.php?controller=Premio&amp;action=listar">Premios</a></li> 
+                          <li class="menuItem"><a href="index.php?controller=Premio&amp;action=listar">Premios</a></li>
+                          <li class="menuItem"><a href="index.php?controller=Patrocinador&amp;action=listar">Patrocinadores</a></li> 
                           <li><a href="index.php?controller=users&amp;action=logout">Logout</a></li>
                         <?php } 
                        } ?>

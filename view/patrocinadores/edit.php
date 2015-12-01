@@ -5,40 +5,32 @@
  require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  
- $premio = $view->getVariable("premio");
+ $patrocinador = $view->getVariable("patrocinador");
  $errors = $view->getVariable("errors");
  
- $view->setVariable("premio", "Edit Premio");
+ $view->setVariable("patrocinador", "Edit Patrocinador");
  
 ?>
 <div class="heading text-center">
 
-            <h1><?= i18n("Modificar premio") ?></h1>
-            <form action="index.php?controller=Premio&amp;action=edit" method="POST">
+            <h1><?= i18n("Modificar patrocinador") ?></h1>
+            <form action="index.php?controller=Patrocinador&amp;action=edit" method="POST">
       
-                  <?= i18n("Nombre Premio") ?>: <input type="text" name="nombrePremio" 
-                  value="<?= isset($_POST["nombrePremio"])?$_POST["nombrePremio"]:$premio->getNombrePremio() ?>">
-                  <?= isset($errors["nombrePremio"])?$errors["nombrePremio"]:"" ?><br>
+                  <?= i18n("Nombre Patrocinador") ?>: <input type="text" name="nombrePatrocinador" 
+                  value="<?= isset($_POST["nombrePatrocinador"])?$_POST["nombrePatrocinador"]:$patrocinador->getNombrePatrocinador() ?>">
+                  <?= isset($errors["nombrePatrocinador"])?$errors["nombrePatrocinador"]:"" ?><br>
       
-                  <?= i18n("Importe Popular") ?>: <input type="text" name="importePopular" 
-                  value="<?= isset($_POST["importePopular"])?$_POST["importePopular"]:$premio->getImportePopular() ?>">
-                  <?= isset($errors["importePopular"])?$errors["importePopular"]:"" ?><br>
+                  <?= i18n("Importe ") ?>: <input type="text" name="importe" 
+                  value="<?= isset($_POST["importe"])?$_POST["importe"]:$patrocinador->getImporte() ?>">
+                  <?= isset($errors["importe"])?$errors["importe"]:"" ?><br>
 
-                  <?= i18n("Importe Profesional") ?>: <input type="text" name="importeProfesional"  
-                  value="<?= isset($_POST["importeProfesional"])?$_POST["importeProfesional"]:$premio->getImporteProfesional() ?>">
-                  <?= isset($errors["importeProfesional"])?$errors["importeProfesional"]:"" ?><br>
-                  
-                  <?= i18n("Fecha Premio") ?>: <input type="text" name="fechaPremio"  
-                  value="<?= isset($_POST["fechaPremio"])?$_POST["fechaPremio"]:$premio->getFechaPremio() ?>">
-                  <?= isset($errors["fechaPremio"])?$errors["fechaPremio"]:"" ?><br>
-
-                  <?= i18n("Id Patrocinador") ?>: <input type="text" name="patrocinador_idPatrocinador"  
-                  value="<?= isset($_POST["patrocinador_idPatrocinador"])?$_POST["patrocinador_idPatrocinador"]:$premio->getPatrocinador_idPatrocinador() ?>">
-                  <?= isset($errors["patrocinador_idPatrocinador"])?$errors["patrocinador_idPatrocinador"]:"" ?><br>
+                  <?= i18n("Numero de Telefono") ?>: <input type="text" name="telefonoPatrocinador"  
+                  value="<?= isset($_POST["telefonoParocinador"])?$_POST["telefonoPatrocinador"]:$patrocinador->getTelefonoPatrocinador() ?>">
+                  <?= isset($errors["telefonoPatrocinador"])?$errors["telefonoPatrocnador"]:"" ?><br>
                       
       
-                  <input type="hidden" name="id" value="<?= $premio->getNombrePremio() ?>">
-                  <input type="submit" name="submit" value="<?= i18n("Modificar premio") ?>">
+                  <input type="hidden" name="id" value="<?= $patrocinador->getNombrePatrocinador() ?>">
+                  <input type="submit" name="submit" value="<?= i18n("Modificar patrocinador") ?>">
             </form>
  </div>   
     

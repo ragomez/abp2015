@@ -109,7 +109,24 @@ class Premio{
 	    }
   	}
 
-
+  public function checkIsValidForUpdate() {
+    $errors = array();
+    
+    if (!isset($this->id)) {      
+      $errors["nombrePremio"] = "El nombre es obligatorio";
+    }
+    
+    try{
+      $this->checkIsValidForCreate();
+    }catch(ValidationException $ex) {
+      foreach ($ex->getErrors() as $key=>$error) {
+  $errors[$key] = $error;
+      }
+    }    
+    if (sizeof($errors) > 0) {
+      throw new ValidationException($errors, "Premio no valido. Introduzca uno correcto.");
+    }
+  }
 
 }
 ?>

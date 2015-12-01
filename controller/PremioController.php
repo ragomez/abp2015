@@ -139,14 +139,6 @@ class PremioController extends BaseController {
     $this->view->redirect("premio", "listar");
     
   }
-   public function view(){  
-    
-    $premios=$this->premioMapper->findAll();    
-    $this->view->setVariable("premios", $premios);
-
-    $this->view->render("premios", "index"); 
-    
-  } 
 
     public function index() {
   

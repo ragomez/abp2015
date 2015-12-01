@@ -58,7 +58,7 @@ include ("includesCSS/includeCss.html");
 										  ?>
 										  <a href="index.php?controller=Premio&amp;action=delete&amp;nombrePremio=<?= $premio->getNombrePremio() ?>">Eliminar</a>
 										  </div>
-									
+										<br/>	
 									</figcaption>
 
 								</figure>
