@@ -54,23 +54,27 @@ class PatrocinadorMapper {
     }   
   }
 
-  public function save(Patrocinador $patrocinador) {
+  public function save(Patrocinador $patrocinador) 
+  {
     $stmt = $this->db->prepare("INSERT INTO patrocinador(idPatrocinador,nombrePatrocinador,importe,
                                             telefonoPatrocinador)
                               values (?,?,?,?)");
     $stmt->execute(array($patrocinador->getIdPatrocinador(),$patrocinador->getNombrePatrocinador(),
-                        $patrocinador->getImporte(), $patrocinador->gettelefonoPatrocinador()));    
+                        $patrocinador->getImporte(), $patrocinador->getTelefonoPatrocinador()));    
   }
     
-  public function update(Patrocinador $patrocinador) {
+  public function update(Patrocinador $patrocinador) 
+  {
     $stmt = $this->db->prepare("UPDATE patrocinador set  nombrePatrocinador=? ,
                               importe=?, telefonoPatrocinador=? where idPatrocinador=?");
 
    $stmt->execute(array($patrocinador->getIdPatrocinador(), $patrocinador->getNombrePatrocinador(),
-                        $patrocinador->getImporte(), $patrocinador->gettelefonoPatrocinador()));
+                        $patrocinador->getImporte(), $patrocinador->getTelefonoPatrocinador()));
   }
   
-  public function delete(Patrocinador $patrocinador) {
+
+  public function delete(Patrocinador $patrocinador)
+  {
     $stmt = $this->db->prepare("DELETE from patrocinador WHERE nombrePatrocinador=?");
     $stmt->execute(array($patrocinador->getNombrePatrocinador()));    
   }

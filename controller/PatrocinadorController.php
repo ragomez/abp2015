@@ -50,13 +50,12 @@ class PatrocinadorController extends BaseController {
 
         $this->view->setFlash("Patrocinador \"".$patrocinador->getNombrePatrocinador()."\" añadido correctamente.");
                                                                                      
-        $this->view->redirect("Patrocinador", "view");                                         
+        $this->view->redirect("Patrocinador", "listar");   // redir a listar                                      
   
       }
       catch(ValidationException $ex) 
       {      
-         $errors = $ex->getErrors(); 
-  
+         $errors = $ex->getErrors();
          $this->view->setVariable("errors", $errors);
       }
     }
@@ -81,6 +80,11 @@ class PatrocinadorController extends BaseController {
     }
 
     if (isset($_POST["submit"])) { // reaching via HTTP Post...  
+      
+      $patrocinador = new Patrocinador();
+
+      $patrocinador->setIdPatrocinador($_POST["idPatrocinador"]);
+      $patrocinador->setNombrePatrocinador($_POST["nombrePatrocinador"]);
       $patrocinador->setImporte($_POST["importe"]);
       $patrocinador->setTelefonoPatrocinador($_POST["telefonoPatrocinador"]);
       
@@ -106,9 +110,7 @@ class PatrocinadorController extends BaseController {
   }
      
   public function delete() {  
-    if (!isset($_POST["nombrePatrocinador"])) {
-      throw new Exception(" El nombre del Patrocinador es obligatorio");
-    }
+  
     if (!isset($this->currentUser)) {
       throw new Exception("Necesario iniciar sesion para eliminar.");
     }
@@ -123,7 +125,7 @@ class PatrocinadorController extends BaseController {
 
     $this->view->setFlash("Patrocinador \"".$patrocinador ->getNombrePatrocinador()."\" eliminado correctamente.");    
 
-    $this->view->redirect("patrocinadores", "patrocinadores");
+    $this->view->redirect("patrocinador", "listar");
     
   }
    public function view(){  

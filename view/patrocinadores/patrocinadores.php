@@ -11,8 +11,7 @@ include ("includesCSS/includeCss.html");
 
  
  $view->setVariable("nombre", "View Patrociandores");
- 
- include("view/users/menuSuperior.php");
+
 ?>
 
 
@@ -64,7 +63,12 @@ include ("includesCSS/includeCss.html");
         </div><!-- // grid-gallery -->
       </div>
   </section>
-
+<div style = "float:right"> 
+<?php 
+ // 'ADD Button'
+ ?>
+ <a href="index.php?controller=Patrocinador&amp;action=add">Añadir Patrocinador</a>
+</div>
 <?php 
   include ("includesCSS/includeJavascript.html");
 ?>

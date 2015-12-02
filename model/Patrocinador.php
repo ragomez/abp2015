@@ -24,9 +24,7 @@ class Patrocinador {
     $this->telefonoPatrocinador = $telefonoPatrocinador; 
   }
 
-  /**
-  GETTERS
-   */ 
+   
 
   public function getIdPatrocinador() {
     return $this->idPatrocinador;
@@ -41,7 +39,9 @@ class Patrocinador {
     return $this->telefonoPatrocinador;
   }
 // Setters
-       
+  public function setIdPatrocinador($idPatrocinador) {
+    $this->idPatrocinador = $idPatrocinador;
+  }     
   
   public function setNombrePatrocinador($nombrePatrocinador) {
     $this->nombrePatrocinador = $nombrePatrocinador;

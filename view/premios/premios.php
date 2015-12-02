@@ -1,31 +1,18 @@
-
-
-
 <?php 
 
 include ("includesCSS/includeCss.html");
-
- //file: view/posts/view.php
- require_once(__DIR__."/../../core/ViewManager.php");
+require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
 
  $premios = $view->getVariable("premios");
  $currentuser = $view->getVariable("currentusername"); 
-
- 
  $view->setVariable("nombre", "View Premio");
- 
- include("view/users/menuSuperior.php");
-?>
-
-<div style = "float:right">	
-<?php 
- // 'ADD Button'
  ?>
- <a href="index.php?controller=Premio&amp;action=add">Añadir Premio</a>
-</div>
 
-<section class="gallery                                                                                                                                                                              " id="gallery">
+
+
+<section class="gallery" id="gallery">
+
 		<div class="container">
 			<div class="heading text-center">
 				<img class="dividerline" src="archivos/sep.png" alt="">
@@ -63,9 +50,10 @@ include ("includesCSS/includeCss.html");
 
 								</figure>
 							</li>
+							
 	<!--fin -->			<?php } ?>						
 						</ul>
-
+						
 					</section><!-- // end small images -->
 					
 					
@@ -73,7 +61,12 @@ include ("includesCSS/includeCss.html");
 
 			</div>
 	</section>
-
+<div style = "float:right">	
+<?php 
+ // 'ADD Button'
+ ?>
+ <a href="index.php?controller=Premio&amp;action=add">Añadir Premio</a>
+</div>
 <?php 
 	include ("includesCSS/includeJavascript.html");
 ?>

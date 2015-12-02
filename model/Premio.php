@@ -60,6 +60,9 @@ class Premio{
     	$this->idPremio = $idPremio;
   	}
     */
+     public function setIdPremio($idPremio){
+      $this->idPremio = $idPremio;
+    }
     public function setNombrePremio($nombrePremio){
       $this->nombrePremio = $nombrePremio;
     }

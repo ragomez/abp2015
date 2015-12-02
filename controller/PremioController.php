@@ -88,6 +88,7 @@ class PremioController extends BaseController {
     }
 
     $premioNombre = $_REQUEST["nombrePremio"];
+
     $premio = $this->premioMapper->findByName($premioNombre);
 
     if ($premio == NULL) {
@@ -95,12 +96,18 @@ class PremioController extends BaseController {
     }
 
     if (isset($_POST["submit"])) { // reaching via HTTP Post...  
+      $premio = new Premio();
+      
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
       $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
       $premio->setNombrePremio($_POST["nombrePremio"]);
-      
+      $premio->setIdPremio($_POST["idPremio"]);
+
+      //print_r($premio);
+      //die();
+
       try {
 
 	       $premio->checkIsValidForUpdate(); // if it fails, ValidationException

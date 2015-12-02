@@ -1,7 +1,6 @@
 <?php 
  //file: view/posts/edit.php
  include ("includesCSS/includeCss.html");
- include ("view/users/menuSuperior.php");
  require_once(__DIR__."/../../core/ViewManager.php");
  $view = ViewManager::getInstance();
  
@@ -12,6 +11,12 @@
  
 ?>
 <div class="heading text-center">
+
+<?//print_r($premio);
+//die();
+
+
+?>
 
             <h1><?= i18n("Modificar premio") ?></h1>
             <form action="index.php?controller=Premio&amp;action=edit" method="POST">
@@ -36,8 +41,7 @@
                   value="<?= isset($_POST["patrocinador_idPatrocinador"])?$_POST["patrocinador_idPatrocinador"]:$premio->getPatrocinador_idPatrocinador() ?>">
                   <?= isset($errors["patrocinador_idPatrocinador"])?$errors["patrocinador_idPatrocinador"]:"" ?><br>
                       
-      
-                  <input type="hidden" name="id" value="<?= $premio->getNombrePremio() ?>">
+                  <input type="hidden" name="idPremio" value=<?= $premio->getIdPremio() ?> >
                   <input type="submit" name="submit" value="<?= i18n("Modificar premio") ?>">
             </form>
  </div>   
