@@ -89,9 +89,17 @@ class EstablecimientoController extends BaseController {
     $this->view->redirect("Establecimiento", "vistaGenerarCodigo");//redirigo a la funcion vistaGenrearCodigo ya que asi muestra de nuevo la miama pantalla
     
   }
+ //lista todos estabs.
 
+ public function listar(){  // Fuka
+    
+    $establecimientos=$this->usuarioMapper->findAll();
+    $this->view->setVariable("establecimientos", $establecimientos);
+    $this->view->render("establecimientos", "index");
+    
+  }
 
-//muestra el perfi de un establecimiento
+//muestra el perfil de un establecimiento
 
   public function mostrar(){
    if (!isset($this->currentUser)) {

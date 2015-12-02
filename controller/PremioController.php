@@ -25,7 +25,10 @@ class PremioController extends BaseController {
    * @var PremioMapper
    */
   private $premioMapper;  
-  
+  private $maxPopular;
+  private $maxProfesional;
+
+
   public function __construct() { 
     parent::__construct();
     
@@ -42,7 +45,7 @@ class PremioController extends BaseController {
   
 
   public function add() { //fuka
-   
+    
     if (!isset($this->currentUser)) {
       throw new Exception("Not in session. Adding premio requires login");
     }
@@ -50,26 +53,29 @@ class PremioController extends BaseController {
     $premio = new Premio();
     
     if (isset($_POST["submit"])) { // reaching via HTTP Post...
-      
+  
       $premio->setImportePopular($_POST["importePopular"]);
       $premio->setImporteProfesional($_POST["importeProfesional"]);
       $premio->setFechaPremio($_POST["fechaPremio"]);
       $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
       $premio->setNombrePremio($_POST["nombrePremio"]);
 
-       
+      if ($_POST["importeProfesional"]>0){
+        $this->maxProfesional=$this->maxProfesional+1;
+      }
+
+      print_r($this->maxProfesional);
+      die();
+
       try {
   
         $premio->checkIsValidForCreate(); 
         $this->premioMapper->save($premio);
-
-        $this->view->setFlash("Premio \"".$premio->getNombrePremio()."\" successfully added.");
                                                                                      
         $this->view->redirect("Premio", "listar");                                         
   
       }catch(ValidationException $ex) {      
          $errors = $ex->getErrors(); 
-  
          $this->view->setVariable("errors", $errors);
       }
     }
@@ -112,9 +118,6 @@ class PremioController extends BaseController {
 
 	       $premio->checkIsValidForUpdate(); // if it fails, ValidationException
 	       $this->premioMapper->update($premio);
-	
-	       $this->view->setFlash(sprintf(i18n("Premio \"%s\" successfully updated."),$premio ->getNombrePremio()));
-
 	       $this->view->redirect("premio", "listar");		
       }
       catch(ValidationException $ex) {
@@ -140,7 +143,6 @@ class PremioController extends BaseController {
     $premio = $this->premioMapper->findByName($premioNombre);
       
     $this->premioMapper->delete($premio);
-    $this->view->setFlash("Premio \"".$premio ->getNombrePremio()."\" successfully deleted.");    
     $this->view->redirect("premio", "listar");
     
   }

@@ -144,7 +144,7 @@ class UserMapper {
     }
 
 }
-  public function findAllEstablecimientos(){
+  public function findAll(){
       $stmt = $this->db->prepare("SELECT * FROM establecimiento");
       $estab_array= $stmt->fetchAll(PDO::FETCH_ASSOC);
 

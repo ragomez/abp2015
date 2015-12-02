@@ -47,8 +47,6 @@ class PatrocinadorController extends BaseController {
   
         $patrocinador->checkIsValidForCreate(); 
         $this->patrocinadorMapper->save($patrocinador);
-
-        $this->view->setFlash("Patrocinador \"".$patrocinador->getNombrePatrocinador()."\" añadido correctamente.");
                                                                                      
         $this->view->redirect("Patrocinador", "listar");   // redir a listar                                      
   
@@ -92,8 +90,7 @@ class PatrocinadorController extends BaseController {
 
 	       $patrocinador->checkIsValidForUpdate(); // if it fails, ValidationException
 	       $this->patrocinadorMapper->update($patrocinador);
-	
-	       $this->view->setFlash(sprintf(i18n("Patrocinador \"%s\" actualizado correctamente."),$patrocinador ->getNombrePatrocinador()));
+
 	       $this->view->redirect("patrocinador", "listar");		
       }
       catch(ValidationException $ex) {
@@ -116,14 +113,13 @@ class PatrocinadorController extends BaseController {
     }
     $patrocinadorNombre = $_REQUEST["nombrePatrocinador"];
     $patrocinador = $this->patrocinadorMapper->findByName($patrocinadorNombre);
+
     
     if ($patrocinador == NULL) {
       throw new Exception("Ningun patrocinador con el nombre \"".$patrocinadorNombre. "\"");
     }  
     
-    $this->patrocinadorMapper->delete($patrocinador);
-
-    $this->view->setFlash("Patrocinador \"".$patrocinador ->getNombrePatrocinador()."\" eliminado correctamente.");    
+    $this->patrocinadorMapper->delete($patrocinador);   
 
     $this->view->redirect("patrocinador", "listar");
     

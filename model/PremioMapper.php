@@ -83,6 +83,7 @@ class PremioMapper {
    * @return void
    */    
   public function save(Premio $premio) {
+
     $stmt = $this->db->prepare("INSERT INTO premio(idPremio,importePopular,
                               importeProfesional, fechaPremio,Patrocinador_idPatrocinador,
                               nombrePremio)
@@ -92,13 +93,6 @@ class PremioMapper {
                         $premio->getPatrocinador_idPatrocinador(), $premio->getNombrePremio()));    
   }
 
-  /**
-   * Updates a Premio in the database
-   * 
-   * @param Premio $premio The premio to be updated
-   * @throws PDOException if a database error occurs
-   * @return void
-   */     
   public function update(Premio $premio) {
     $stmt = $this->db->prepare("UPDATE premio set  importePopular=? ,
                               importeProfesional=?, fechaPremio=?,
