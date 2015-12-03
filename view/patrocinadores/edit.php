@@ -28,9 +28,8 @@
                   <?= i18n("Numero de Telefono") ?>: <input type="text" name="telefonoPatrocinador"  
                   value="<?= isset($_POST["telefonoPatrocinador"])?$_POST["telefonoPatrocinador"]:$patrocinador->getTelefonoPatrocinador() ?>">
                   <?= isset($errors["telefonoPatrocinador"])?$errors["telefonoPatrocnador"]:"" ?><br>
-                      
-            
-                  <input type="hidden" name="idPatrocinador" value=<?= $patrocinador->getIdPatrocinador() ?>>
+                  
+                  <input type="hidden" name="idPatrocinador" value=<?= $patrocinador->getIdPatrocinador()?> >
                   <input type="submit" name="submit" value="<?= i18n("Modificar patrocinador") ?>">
             </form>
  </div>   

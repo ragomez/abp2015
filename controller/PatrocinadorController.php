@@ -86,6 +86,7 @@ class PatrocinadorController extends BaseController {
       $patrocinador->setImporte($_POST["importe"]);
       $patrocinador->setTelefonoPatrocinador($_POST["telefonoPatrocinador"]);
       
+      
       try {
 
 	       $patrocinador->checkIsValidForUpdate(); // if it fails, ValidationException

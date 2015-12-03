@@ -66,11 +66,14 @@ class PatrocinadorMapper {
     
   public function update(Patrocinador $patrocinador) 
   {
-    $stmt = $this->db->prepare("UPDATE patrocinador set  nombrePatrocinador=? ,
-                              importe=?, telefonoPatrocinador=? where idPatrocinador=?");
 
-   $stmt->execute(array($patrocinador->getIdPatrocinador(), $patrocinador->getNombrePatrocinador(),
-                        $patrocinador->getImporte(), $patrocinador->getTelefonoPatrocinador()));
+
+    $stmt = $this->db->prepare("UPDATE patrocinador 
+                              set  nombrePatrocinador=? ,importe=?, telefonoPatrocinador=? 
+                              where idPatrocinador=?");
+
+    $stmt->execute(array($patrocinador->getNombrePatrocinador(),$patrocinador->getImporte(),
+                         $patrocinador->getTelefonoPatrocinador(),$patrocinador->getIdPatrocinador()));
   }
   
 

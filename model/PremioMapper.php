@@ -1,4 +1,4 @@
-<?php
+ <?php
 // file: model/PostMapper.php
 require_once(__DIR__."/../core/PDOConnection.php");
 
@@ -95,14 +95,15 @@ class PremioMapper {
   }
 
   public function update(Premio $premio) {
-    $stmt = $this->db->prepare("UPDATE premio set  importePopular=? ,
-                              importeProfesional=?, fechaPremio=?,
-                              Patrocinador_idPatrocinador =?  
-                              ,nombrePremio=? where idPremio=?");
+    $stmt = $this->db->prepare("UPDATE premio 
+                              set  importePopular=? ,importeProfesional=?, fechaPremio=?,
+                              Patrocinador_idPatrocinador =? ,nombrePremio=? 
+                              where idPremio=?");
 
     $stmt->execute(array($premio->getImportePopular(),$premio->getImporteProfesional(),
                         $premio->getFechaPremio(),$premio->getPatrocinador_idPatrocinador(),
                         $premio->getNombrePremio(),$premio->getIdPremio()));
+
   }
   
   public function delete(Premio $premio) {
