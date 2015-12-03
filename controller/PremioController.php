@@ -60,13 +60,6 @@ class PremioController extends BaseController {
       $premio->setPatrocinador_idPatrocinador($_POST["patrocinador_idPatrocinador"]);
       $premio->setNombrePremio($_POST["nombrePremio"]);
 
-      if ($_POST["importeProfesional"]>0){
-        $this->maxProfesional=$this->maxProfesional+1;
-      }
-
-      print_r($this->maxProfesional);
-      die();
-
       try {
   
         $premio->checkIsValidForCreate(); 

@@ -34,6 +34,7 @@ class PremioMapper {
    */  
   public function findAll() {   
     $stmt = $this->db->query("SELECT * FROM premio");    
+    $stmt->execute();
     $premio_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
     $listaPremios = array();

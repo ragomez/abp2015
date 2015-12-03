@@ -3,6 +3,7 @@
 
 require_once(__DIR__."/../core/PDOConnection.php");
 require_once(__DIR__."/../model/UserEstablecimiento.php");
+
 /**
  * Class UserMapper
  *
@@ -146,14 +147,15 @@ class UserMapper {
 }
   public function findAll(){
       $stmt = $this->db->prepare("SELECT * FROM establecimiento");
+      $stmt->execute();
       $estab_array= $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       $listaEstablecimientos= array();
 
       foreach ($estab_array as $establecimiento) {
         array_push($listaEstablecimientos, new Establecimiento( 
-         $establecimiento["idEstablecimiento"],
-         $establecimiento["login"],
+           $establecimiento["idEstablecimiento"],
+           $establecimiento["login"],
            $establecimiento["password"],
            $establecimiento["cif"],
            $establecimiento["nombreEstablecimiento"],
@@ -164,6 +166,7 @@ class UserMapper {
            $establecimiento["Pincho_idPincho"],
            $establecimiento["tipo"]));
       }
+
 
       return $listaEstablecimientos;
     }

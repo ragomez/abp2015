@@ -41,9 +41,7 @@ class Establecimiento {
 
 
   public function getIdEstablecimiento() {
-    //return $this->idJuradoPopular;
-    //$this->idJuradoPopular = $this->idJuradoPopular +1;
-    //return $this->idJuradoPopular;
+
     return $this->idEstablecimiento;
   
   } 

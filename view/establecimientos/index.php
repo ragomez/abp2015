@@ -19,7 +19,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 				<h2>Establecimientos 2015</h2>
 				<img class="dividerline" src="archivos/sep.png" alt="">
 			</div>
-			
+	
 			<div id="grid-gallery" class="grid-gallery">
 					<section class="grid-wrap">
 						<ul  class="grid">
@@ -27,10 +27,7 @@ require_once(__DIR__."/../../core/ViewManager.php");
 	<!--inicio -->		<?php foreach ($establecimientos as $establecimiento) { ?>
 							<li class=" col-md-3">
 								<figure>                           
-								<?php 
-								 print_r($establecimiento);
-								 die();	
-								?>								
+															
 									<figcaption><h3><?= $establecimiento->getNombre() ?> </h3>
 										<p>Nombre 		 		:<?= $establecimiento->getNombre() ?></p>
 										<p>CIF 				    :<?= $establecimiento->getCif() ?></p>
