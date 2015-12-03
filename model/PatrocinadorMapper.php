@@ -14,7 +14,8 @@ class PatrocinadorMapper {
 
    
   public function findAll() {   
-    $stmt = $this->db->query("SELECT * FROM patrocinador");    
+    $stmt = $this->db->query("SELECT * FROM patrocinador"); 
+    $stmt-> execute();   
     $patrocinadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
    
     $listaPatrocinadores = array();
